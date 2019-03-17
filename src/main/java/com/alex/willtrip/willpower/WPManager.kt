@@ -1,19 +1,23 @@
 package com.alex.willtrip.willpower
 
-import com.alex.willtrip.willpower.interfaces.WPChangeSubscriber
+import com.alex.willtrip.willpower.interfaces.WPSubscriber
 import com.alex.willtrip.willpower.interfaces.WPLoader
+import com.alex.willtrip.willpower.interfaces.WPMutator
 import io.objectbox.reactive.DataObserver
 import io.objectbox.reactive.DataSubscription
 
-class WPManager (val mutator: Mutator, val loader: WPLoader, val subscriber: WPChangeSubscriber) {
+class WPManager (private val mutator: WPMutator, private val loader: WPLoader, private val subscriber: WPSubscriber) {
 
     init {
-        mutator.wp = loadWP()
+        val willPower = loadWP() ?: WillPower()
+        mutator.setWP(willPower)
     }
 
     private fun loadWP ()= loader.loadWillPower()
 
-    fun getCurrentWP (): Int = mutator.getCurrentWP()
+    fun getCurrentWP (): Int {
+        return loader.loadWillPower()?.willPower ?: 0
+    }
 
     fun increaseWP (value: Int): Int {
         val newWP = mutator.increase(value)

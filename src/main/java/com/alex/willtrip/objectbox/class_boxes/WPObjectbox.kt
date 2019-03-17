@@ -1,15 +1,15 @@
-package com.alex.willtrip.objectbox.willpower_db
+package com.alex.willtrip.objectbox.class_boxes
 
 import com.alex.willtrip.objectbox.ObjectBox
 import com.alex.willtrip.willpower.WillPower
 import com.alex.willtrip.willpower.WillPower_
-import com.alex.willtrip.willpower.interfaces.WPChangeSubscriber
+import com.alex.willtrip.willpower.interfaces.WPSubscriber
 import com.alex.willtrip.willpower.interfaces.WPLoader
 import io.objectbox.Box
 import io.objectbox.reactive.DataObserver
 import io.objectbox.reactive.DataSubscription
 
-class WPObjectbox : WPLoader, WPChangeSubscriber {
+class WPObjectbox : WPLoader, WPSubscriber {
 
     private val query by lazy {
         getBox().query().equal(WillPower_.id, 0).build()
@@ -20,10 +20,9 @@ class WPObjectbox : WPLoader, WPChangeSubscriber {
         return ObjectBox.boxStore.boxFor(WillPower::class.java)
     }
 
-    override fun loadWillPower(): WillPower {
-        return if (getBox().all.isEmpty()) {
-            WillPower()
-        } else getBox().all[0]
+    override fun loadWillPower(): WillPower? {
+        if (getBox().isEmpty) return null
+        return getBox().all[0]
     }
 
     private fun loadWillPowerAsInt(): Int {
@@ -38,7 +37,7 @@ class WPObjectbox : WPLoader, WPChangeSubscriber {
     }
 
     override fun addObserver(observer: DataObserver<Int>): DataSubscription {
-        return query.subscribe().transform { clazz -> loadWillPowerAsInt()}.observer(observer)
+        return query.subscribe().transform { loadWillPowerAsInt()}.observer(observer)
     }
 
     override fun removeObserver(dataSubscription: DataSubscription) {

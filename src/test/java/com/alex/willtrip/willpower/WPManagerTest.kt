@@ -13,7 +13,7 @@ class WPManagerTest: AbstractObjectBoxTest() {
 
         @Before
         fun setUp() {
-            wpManager = DaggerWPComponent.create().getWPManager()
+            wpManager = DaggerWPComponent.create().wpManager()
         }
 
 
@@ -28,8 +28,8 @@ class WPManagerTest: AbstractObjectBoxTest() {
         wpManager.decreaseWP(initialValue)
         wpManager.increaseWP(50)
         wpManager.decreaseWP(30)
-        val dbValue = wpManager.loader.loadWillPower()
-        assertThat(wpManager.getCurrentWP()).isEqualTo(dbValue.willPower)
+        val dbValue = wpManager.getCurrentWP()
+        assertThat(wpManager.getCurrentWP()).isEqualTo(dbValue)
         assertThat(wpManager.getCurrentWP()).isEqualTo(20)
     }
 

@@ -4,31 +4,57 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:5687924772062367261",
-      "lastPropertyId": "2:5957044420671802718",
-      "name": "WillPowerDB",
+      "id": "2:2923336420179113109",
+      "lastPropertyId": "2:7240153108302140952",
+      "name": "WillPower",
       "properties": [
         {
-          "id": "1:1869708631858268871",
+          "id": "1:7468264861325177751",
           "name": "id"
         },
         {
-          "id": "2:5957044420671802718",
+          "id": "2:7240153108302140952",
+          "name": "willPower"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:5869401983421857858",
+      "lastPropertyId": "3:6419314631895931396",
+      "name": "Setting",
+      "properties": [
+        {
+          "id": "1:6031347612089127186",
+          "indexId": "1:5343292500704536604",
+          "name": "name"
+        },
+        {
+          "id": "2:1761415303900663166",
           "name": "value"
+        },
+        {
+          "id": "3:6419314631895931396",
+          "name": "id"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:5687924772062367261",
-  "lastIndexId": "0:0",
+  "lastEntityId": "3:5869401983421857858",
+  "lastIndexId": "1:5343292500704536604",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    5687924772062367261
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    1869708631858268871,
+    5957044420671802718
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

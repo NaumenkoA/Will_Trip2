@@ -1,8 +1,7 @@
 package com.alex.willtrip.objectbox
 
 import android.app.Application
-import com.alex.willtrip.willpower.MyObjectBox
-
+import com.alex.willtrip.MyObjectBox
 
 class App : Application() {
 

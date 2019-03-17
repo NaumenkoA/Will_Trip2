@@ -1,7 +1,8 @@
 package com.alex.willtrip.di
 
 import com.alex.willtrip.willpower.*
-import com.alex.willtrip.objectbox.willpower_db.WPObjectbox
+import com.alex.willtrip.objectbox.class_boxes.WPObjectbox
+import com.alex.willtrip.willpower.interfaces.WPMutator
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -10,7 +11,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [WPModule::class])
 interface WPComponent {
-    fun getWPManager(): WPManager
+    fun wpManager(): WPManager
 }
 
 @Module
@@ -18,7 +19,7 @@ class WPModule {
 
     @Singleton
     @Provides
-    internal fun providesWPManager(mutator: Mutator,
+    fun providesWPManager(mutator: WPMutator,
                                    loader: WPObjectbox,
                                    messenger: WPObjectbox): WPManager {
         return WPManager (mutator, loader, messenger)
@@ -27,19 +28,19 @@ class WPModule {
 
     @Singleton
     @Provides
-    internal fun providesMutator(): Mutator {
+    fun providesMutator(): WPMutator {
         return Mutator()
     }
 
     @Singleton
     @Provides
-    internal fun providesWillPower(): WillPower {
+    fun providesWillPower(): WillPower {
         return WillPower()
     }
 
     @Singleton
     @Provides
-    internal fun providesWPObjectbox(): WPObjectbox {
+    fun providesWPObjectbox(): WPObjectbox {
         return WPObjectbox()
     }
 

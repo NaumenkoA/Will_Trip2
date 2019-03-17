@@ -18,21 +18,48 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:2498495466067633801",
+      "lastPropertyId": "3:9092998965824836311",
+      "name": "SettingEntity",
+      "properties": [
+        {
+          "id": "1:6382530837236855206",
+          "name": "id"
+        },
+        {
+          "id": "2:6438393448541481825",
+          "indexId": "2:4315032864578245689",
+          "name": "name"
+        },
+        {
+          "id": "3:9092998965824836311",
+          "name": "value"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:2923336420179113109",
-  "lastIndexId": "0:0",
+  "lastEntityId": "4:2498495466067633801",
+  "lastIndexId": "2:4315032864578245689",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [
-    5687924772062367261
+    5687924772062367261,
+    5869401983421857858
   ],
-  "retiredIndexUids": [],
+  "retiredIndexUids": [
+    5343292500704536604
+  ],
   "retiredPropertyUids": [
     1869708631858268871,
-    5957044420671802718
+    5957044420671802718,
+    6031347612089127186,
+    1761415303900663166,
+    6419314631895931396
   ],
   "retiredRelationUids": [],
   "version": 1

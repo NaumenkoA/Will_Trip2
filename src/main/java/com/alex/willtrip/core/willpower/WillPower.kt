@@ -1,4 +1,4 @@
-package com.alex.willtrip.willpower
+package com.alex.willtrip.core.willpower
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id

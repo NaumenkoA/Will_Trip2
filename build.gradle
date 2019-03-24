@@ -39,4 +39,6 @@ dependencies {
     kapt 'com.google.dagger:dagger-android-processor:2.15'
     kapt 'com.google.dagger:dagger-compiler:2.15'
     kaptTest 'com.google.dagger:dagger-compiler:2.15'
+
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 }

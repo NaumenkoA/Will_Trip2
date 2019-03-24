@@ -1,4 +1,4 @@
-package com.alex.willtrip.settings.interfaces
+package com.alex.willtrip.core.settings.interfaces
 
 interface SettingsDB {
     fun saveSetting (settingName: String, settingValue: Int)

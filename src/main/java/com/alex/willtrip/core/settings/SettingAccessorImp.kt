@@ -1,7 +1,7 @@
-package com.alex.willtrip.settings
+package com.alex.willtrip.core.settings
 
-import com.alex.willtrip.settings.interfaces.SettingAccessor
-import com.alex.willtrip.settings.interfaces.SettingsDB
+import com.alex.willtrip.core.settings.interfaces.SettingAccessor
+import com.alex.willtrip.core.settings.interfaces.SettingsDB
 import java.lang.IllegalArgumentException
 
 class SettingAccessorImp (val settingsDB: SettingsDB): SettingAccessor {

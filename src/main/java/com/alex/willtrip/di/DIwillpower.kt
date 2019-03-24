@@ -1,8 +1,8 @@
 package com.alex.willtrip.di
 
-import com.alex.willtrip.willpower.*
+import com.alex.willtrip.core.willpower.*
 import com.alex.willtrip.objectbox.class_boxes.WPObjectbox
-import com.alex.willtrip.willpower.interfaces.WPMutator
+import com.alex.willtrip.core.willpower.interfaces.WPMutator
 import dagger.Component
 import dagger.Module
 import dagger.Provides

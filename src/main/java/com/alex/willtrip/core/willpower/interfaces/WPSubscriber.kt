@@ -1,4 +1,4 @@
-package com.alex.willtrip.willpower.interfaces
+package com.alex.willtrip.core.willpower.interfaces
 
 import io.objectbox.reactive.DataObserver
 import io.objectbox.reactive.DataSubscription

@@ -1,8 +1,8 @@
-package com.alex.willtrip.settings
+package com.alex.willtrip.core.settings
 
-import com.alex.willtrip.settings.interfaces.SettingAccessor
-import com.alex.willtrip.settings.interfaces.SettingSubscriber
-import com.alex.willtrip.settings.interfaces.SettingToDefault
+import com.alex.willtrip.core.settings.interfaces.SettingAccessor
+import com.alex.willtrip.core.settings.interfaces.SettingSubscriber
+import com.alex.willtrip.core.settings.interfaces.SettingToDefault
 import io.objectbox.reactive.DataObserver
 import io.objectbox.reactive.DataSubscription
 

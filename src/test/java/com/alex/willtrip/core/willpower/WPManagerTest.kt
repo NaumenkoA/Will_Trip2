@@ -1,4 +1,4 @@
-package com.alex.willtrip.willpower
+package com.alex.willtrip.core.willpower
 import com.alex.willtrip.AbstractObjectBoxTest
 import com.alex.willtrip.di.DaggerWPComponent
 import org.junit.Test

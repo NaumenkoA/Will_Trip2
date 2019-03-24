@@ -1,9 +1,9 @@
 package com.alex.willtrip.objectbox.class_boxes
 
 import com.alex.willtrip.objectbox.ObjectBox
-import com.alex.willtrip.settings.Setting
-import com.alex.willtrip.settings.interfaces.SettingSubscriber
-import com.alex.willtrip.settings.interfaces.SettingsDB
+import com.alex.willtrip.core.settings.Setting
+import com.alex.willtrip.core.settings.interfaces.SettingSubscriber
+import com.alex.willtrip.core.settings.interfaces.SettingsDB
 import io.objectbox.Box
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id

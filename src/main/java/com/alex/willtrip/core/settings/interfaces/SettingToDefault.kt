@@ -1,4 +1,4 @@
-package com.alex.willtrip.settings.interfaces
+package com.alex.willtrip.core.settings.interfaces
 
 interface SettingToDefault {
     fun resetToDefault (settingName: String)

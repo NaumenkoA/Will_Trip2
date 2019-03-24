@@ -1,8 +1,8 @@
-package com.alex.willtrip.willpower
+package com.alex.willtrip.core.willpower
 
-import com.alex.willtrip.willpower.interfaces.WPSubscriber
-import com.alex.willtrip.willpower.interfaces.WPLoader
-import com.alex.willtrip.willpower.interfaces.WPMutator
+import com.alex.willtrip.core.willpower.interfaces.WPSubscriber
+import com.alex.willtrip.core.willpower.interfaces.WPLoader
+import com.alex.willtrip.core.willpower.interfaces.WPMutator
 import io.objectbox.reactive.DataObserver
 import io.objectbox.reactive.DataSubscription
 

@@ -1,7 +1,7 @@
-package com.alex.willtrip.settings
+package com.alex.willtrip.core.settings
 
-import com.alex.willtrip.settings.interfaces.SettingToDefault
-import com.alex.willtrip.settings.interfaces.SettingsDB
+import com.alex.willtrip.core.settings.interfaces.SettingToDefault
+import com.alex.willtrip.core.settings.interfaces.SettingsDB
 
 class SettingDefaulter (val settingDB: SettingsDB): SettingToDefault {
 

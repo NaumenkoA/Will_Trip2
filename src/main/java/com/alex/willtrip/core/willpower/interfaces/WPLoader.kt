@@ -1,6 +1,6 @@
-package com.alex.willtrip.willpower.interfaces
+package com.alex.willtrip.core.willpower.interfaces
 
-import com.alex.willtrip.willpower.WillPower
+import com.alex.willtrip.core.willpower.WillPower
 
 interface WPLoader {
     fun loadWillPower (): WillPower?

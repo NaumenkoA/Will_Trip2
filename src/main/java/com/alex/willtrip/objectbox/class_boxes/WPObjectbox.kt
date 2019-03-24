@@ -1,10 +1,10 @@
 package com.alex.willtrip.objectbox.class_boxes
 
 import com.alex.willtrip.objectbox.ObjectBox
-import com.alex.willtrip.willpower.WillPower
-import com.alex.willtrip.willpower.WillPower_
-import com.alex.willtrip.willpower.interfaces.WPSubscriber
-import com.alex.willtrip.willpower.interfaces.WPLoader
+import com.alex.willtrip.core.willpower.WillPower
+import com.alex.willtrip.core.willpower.WillPower_
+import com.alex.willtrip.core.willpower.interfaces.WPSubscriber
+import com.alex.willtrip.core.willpower.interfaces.WPLoader
 import io.objectbox.Box
 import io.objectbox.reactive.DataObserver
 import io.objectbox.reactive.DataSubscription

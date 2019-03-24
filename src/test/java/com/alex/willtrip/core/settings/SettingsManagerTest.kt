@@ -1,4 +1,4 @@
-package com.alex.willtrip.settings
+package com.alex.willtrip.core.settings
 
 import com.alex.willtrip.AbstractObjectBoxTest
 import com.alex.willtrip.di.DaggerSettingsComponent

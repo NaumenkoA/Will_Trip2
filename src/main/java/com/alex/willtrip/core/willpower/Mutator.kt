@@ -1,6 +1,6 @@
-package com.alex.willtrip.willpower
+package com.alex.willtrip.core.willpower
 
-import com.alex.willtrip.willpower.interfaces.WPMutator
+import com.alex.willtrip.core.willpower.interfaces.WPMutator
 
 class Mutator (var wp: WillPower): WPMutator {
 

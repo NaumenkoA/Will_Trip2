@@ -1,14 +1,13 @@
 package com.alex.willtrip.di
 
 import com.alex.willtrip.objectbox.class_boxes.SettingsObjectbox
-import com.alex.willtrip.settings.SettingAccessorImp
-import com.alex.willtrip.settings.SettingDefaulter
-import com.alex.willtrip.settings.SettingsManager
-import com.alex.willtrip.settings.interfaces.SettingAccessor
-import com.alex.willtrip.settings.interfaces.SettingSubscriber
-import com.alex.willtrip.settings.interfaces.SettingToDefault
-import com.alex.willtrip.settings.interfaces.SettingsDB
-import com.alex.willtrip.willpower.interfaces.WPSubscriber
+import com.alex.willtrip.core.settings.SettingAccessorImp
+import com.alex.willtrip.core.settings.SettingDefaulter
+import com.alex.willtrip.core.settings.SettingsManager
+import com.alex.willtrip.core.settings.interfaces.SettingAccessor
+import com.alex.willtrip.core.settings.interfaces.SettingSubscriber
+import com.alex.willtrip.core.settings.interfaces.SettingToDefault
+import com.alex.willtrip.core.settings.interfaces.SettingsDB
 import dagger.Component
 import dagger.Module
 import dagger.Provides

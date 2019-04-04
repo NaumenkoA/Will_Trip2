@@ -27,7 +27,7 @@ class SettingsModule {
 
     @Singleton
     @Provides
-    internal fun providesSettingsManager(accessor: SettingAccessor, subscriber: SettingSubscriber,defaulter: SettingToDefault
+    fun providesSettingsManager(accessor: SettingAccessor, subscriber: SettingSubscriber,defaulter: SettingToDefault
     ): SettingsManager {
         return SettingsManager (accessor, subscriber, defaulter)
     }
@@ -35,25 +35,25 @@ class SettingsModule {
 
     @Singleton
     @Provides
-    internal fun providesAccessor(settingsDB: SettingsDB): SettingAccessor {
+    fun providesAccessor(settingsDB: SettingsDB): SettingAccessor {
         return SettingAccessorImp(settingsDB)
     }
 
     @Singleton
     @Provides
-    internal fun providesDB(): SettingsDB {
+    fun providesDB(): SettingsDB {
         return objectbox
     }
 
     @Singleton
     @Provides
-    internal fun providesSubscriber(): SettingSubscriber {
+    fun providesSubscriber(): SettingSubscriber {
         return objectbox
     }
 
     @Singleton
     @Provides
-    internal fun providesDefault(settingsDB: SettingsDB): SettingToDefault{
+    fun providesDefault(settingsDB: SettingsDB): SettingToDefault{
         return SettingDefaulter(settingsDB)
     }
 }

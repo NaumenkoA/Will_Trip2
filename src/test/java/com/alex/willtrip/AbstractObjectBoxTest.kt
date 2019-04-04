@@ -1,5 +1,6 @@
 package com.alex.willtrip
 
+import com.alex.willtrip.core.MyObjectBox
 import com.alex.willtrip.objectbox.ObjectBox
 import org.junit.After
 import org.junit.Before

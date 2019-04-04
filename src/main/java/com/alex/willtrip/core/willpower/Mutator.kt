@@ -6,8 +6,8 @@ class Mutator (var wp: WillPower): WPMutator {
 
     constructor() : this(WillPower())
 
-    override fun setWP(wp: WillPower) {
-        this.wp = wp
+    override fun setWP(willPower: WillPower) {
+        this.wp = willPower
     }
 
     override fun getCurrentWP(): Int {

@@ -23,8 +23,10 @@ class ResultMutatorImp: ResultMutator {
         if (resultsToRemove.isNotEmpty()) getResultBox().remove(resultsToRemove)
     }
 
-    override fun removeResult(result: Result) {
+    override fun removeResult(result: Result): Boolean {
+        getResultBox().get(result.id) ?: return false
         getResultBox().remove(result)
+        return true
     }
 
     override fun removeResult(doId: Long, date: LocalDate) {

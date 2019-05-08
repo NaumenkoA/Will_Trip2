@@ -17,7 +17,7 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Before
     fun setUp() {
-        doManager = DaggerDoManagerComponent.create().doManager()
+        doManager = DaggerAppComponent.builder().build().doManager()
     }
 
     @Test
@@ -26,10 +26,9 @@ class DoManagerTest:AbstractObjectBoxTest() {
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 3), expireDate = LocalDate.of(2019, 12, 31))
 
-        val everyNDays = DaggerEveryNDaysBehaviorComponent.builder().settingsComponent(DaggerSettingsComponent.create()).
-            everyNDaysBehaviorModule(EveryNDaysBehaviorModule(3))
-            .build().everyNDaysBehavior()
-        val doObj2 = Do (name="Test 2", periodBehavior = everyNDays ,
+        val everyNDays = DaggerEveryNDaysBehaviorComponent.builder().appComponent(DaggerAppComponent.create()).
+            everyNDaysBehaviorModule(EveryNDaysBehaviorModule(3)).build().everyNDaysBehavior()
+        val doObj2 = Do (name="Test 2", periodBehavior = everyNDays,
             note = "Test do2", isSpecialDayEnabled = false, isPositive = true, complexity = 3,
             startDate = LocalDate.of(2019, 4, 3), expireDate = LocalDate.of(2019, 12, 31))
 
@@ -58,13 +57,13 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test(expected = IllegalArgumentException::class)
     fun checkDoNameExistsThrowsException() {
-        val doObj1 = Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 3), expireDate = LocalDate.of(2019, 12, 31))
 
         doManager.addNewDo(doObj1)
 
-        val doObj2= Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2= Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do2", isSpecialDayEnabled = false, isPositive = false, complexity = 2,
             startDate = LocalDate.of(2019, 4, 3), expireDate = LocalDate.of(2019, 12, 31))
 
@@ -73,27 +72,27 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun loadActualDoForDate() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 4, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior =DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 5, 3), expireDate = LocalDate.of(2019, 4, 1))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 4, 1))
 
-        val doObj5 = Do (name="Test5", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj5 = Do (name="Test5", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 5, 1))
 
-        val doObj6 = Do (name="Test6", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj6 = Do (name="Test6", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 5, 1), expireDate = LocalDate.of(2019, 12, 12))
 
@@ -111,19 +110,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun loadAllExceptArchive() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -139,27 +138,27 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun loadArchiveDoForDate() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 4, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 5, 3), expireDate = LocalDate.of(2019, 4, 1))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior =DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 4, 1))
 
-        val doObj5 = Do (name="Test5", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj5 = Do (name="Test5", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 5, 1))
 
-        val doObj6 = Do (name="Test6", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj6 = Do (name="Test6", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 5, 1), expireDate = LocalDate.of(2019, 12, 12))
 
@@ -177,7 +176,7 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun getIdByName() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 4, 3), expireDate = LocalDate.of(2019, 1, 31))
 
@@ -192,19 +191,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun removeDoById() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -222,11 +221,11 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test (expected = IllegalArgumentException::class)
     fun removeDoByWrongIdThrowsException() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
@@ -238,19 +237,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun removeDoByName() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -268,19 +267,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test (expected = IllegalArgumentException::class)
     fun removeDoByWrongNameThrowsException() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -294,19 +293,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun editDoById() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = true, complexity = 5,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -322,19 +321,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test (expected = IllegalArgumentException::class)
     fun editDoByWrongIdThrowsException() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = true, complexity = 5,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -347,19 +346,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun editDoByName() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = true, complexity = 5,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -374,19 +373,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test (expected = IllegalArgumentException::class)
     fun editDoByWrongNameThrowsException() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = true, complexity = 5,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -399,19 +398,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun getDoByName () {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = true, complexity = 5,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -426,19 +425,19 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun getDoById () {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj4 = Do (name="Test4", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = true, complexity = 5,
             startDate = LocalDate.of(2019, 4, 20))
 
@@ -453,28 +452,29 @@ class DoManagerTest:AbstractObjectBoxTest() {
 
     @Test
     fun subscriptionTest() {
-        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj1 = Do (name="Test1", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2018, 3, 3), expireDate = LocalDate.of(2019, 3, 31))
 
-        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj2 = Do (name="Test2", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
-        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doObj3 = Do (name="Test3", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
 
         val observer = DoChangeObserver()
         val subscriber = doManager.addObserver(observer)
         doManager.addNewDo(doObj1)
+        doManager.addNewDo(doObj2)
 
         Thread.sleep(500)
 
         doManager.removeObserver(subscriber)
         doManager.addNewDo(doObj3)
 
-        assertThat(observer.numOfChanges).isEqualTo(2)
+        assertThat(observer.numOfChanges).isEqualTo(3)
     }
 
     class DoChangeObserver: DataObserver<Class<DoDB>> {

@@ -64,8 +64,7 @@ fun DoDB.toDo(): Do {
         }
 
         PeriodBehaviourType.EVERY_N_DAY.name -> {
-            periodBehavior = DaggerEveryNDaysBehaviorComponent.builder().
-                settingsComponent(DaggerSettingsComponent.create()).
+            periodBehavior = DaggerEveryNDaysBehaviorComponent.builder().appComponent(DaggerAppComponent.create()).
                 everyNDaysBehaviorModule(EveryNDaysBehaviorModule(list[0])).build().everyNDaysBehavior()
         }
 

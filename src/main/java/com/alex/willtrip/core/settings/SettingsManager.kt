@@ -12,20 +12,20 @@ class SettingsManager (private val accessor: SettingAccessor, private val subscr
         defaulter.resetAllToDefault()
     }
 
-    fun resetToDefault (settingName: String) {
-        defaulter.resetToDefault(settingName)
+    fun resetToDefault (setting: Setting) {
+        defaulter.resetToDefault(setting.name)
     }
 
-    fun getSettingValue (settingName: String): Int {
-        return accessor.getSetting(settingName)
+    fun getSettingValue (setting: Setting): Int {
+        return accessor.getSetting(setting.name)
     }
 
-    fun setSettingValue (settingName: String, newValue: Int) {
-        accessor.editSetting(settingName, newValue)
+    fun setSettingValue (setting: Setting, newValue: Int) {
+        accessor.editSetting(setting.name, newValue)
     }
 
-    fun addSettingObserver (settingName:String, observer: DataObserver<Pair<String, Int>>): DataSubscription {
-        return subscriber.addObserver(settingName, observer)
+    fun addSettingObserver (setting: Setting, observer: DataObserver<Pair<String, Int>>): DataSubscription {
+        return subscriber.addObserver(setting.name, observer)
     }
 
     fun removeObserver(dataSubscription: DataSubscription) {

@@ -26,6 +26,12 @@ class ChainLoaderImp: ChainLoader {
         return getMaxChainBox().query().equal(MaxChain_.doId, doId).build().findUnique()
     }
 
+    override fun cancelCurrentChain(doId: Long) {
+        val currentChain = getCurrentChainBox().query().equal(CurrentChain_.doId, doId).build().findUnique()
+        if (currentChain != null) getCurrentChainBox().remove(currentChain.id)
+    }
+
+
     override fun putCurrentChain(currentChain: CurrentChain) {
         val existingChain = getCurrentChain(currentChain.doId)
         if (existingChain != null) currentChain.id = existingChain.id

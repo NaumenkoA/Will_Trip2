@@ -1,7 +1,7 @@
 package com.alex.willtrip.core.settings
 
 import com.alex.willtrip.AbstractObjectBoxTest
-import com.alex.willtrip.di.DaggerSettingsComponent
+import com.alex.willtrip.di.DaggerAppComponent
 import com.alex.willtrip.objectbox.ObjectBox
 import com.alex.willtrip.objectbox.class_boxes.SettingEntity
 import org.junit.Test
@@ -17,36 +17,32 @@ class SettingsManagerTest: AbstractObjectBoxTest() {
 
     @Before
     fun setUp() {
-        settingsManager = DaggerSettingsComponent.create().settingsManager()
+        settingsManager = DaggerAppComponent.builder().build().settingsManager()
     }
 
-    @Test (expected = IllegalArgumentException::class)
-    fun wrongNameThrowsException() {
-        settingsManager.setSettingValue("Not exists", 0)
-    }
 
     @Test (expected = IllegalArgumentException::class)
     fun wrongValueThrowsException() {
-        settingsManager.setSettingValue(Setting.CHAIN_POINTS.name, 2)
+        settingsManager.setSettingValue(Setting.CHAIN_POINTS, 2)
     }
 
     @Test
     fun checkDefaultWhenNoValueSet() {
         ObjectBox.boxStore.boxFor(SettingEntity::class.java).all.clear()
-        val default = settingsManager.getSettingValue(Setting.NOTIFICATION_TIME.name)
+        val default = settingsManager.getSettingValue(Setting.NOTIFICATION_TIME)
 
         assertThat(default).isEqualTo(79200)
     }
 
     @Test
     fun resetAllToDefault() {
-        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME.name, 1000)
-        settingsManager.setSettingValue(Setting.CHAIN_POINTS.name, 0)
+        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME, 1000)
+        settingsManager.setSettingValue(Setting.CHAIN_POINTS, 0)
 
 
         settingsManager.resetAllToDefault()
-        val notifTimeSetting = settingsManager.getSettingValue(Setting.NOTIFICATION_TIME.name)
-        val chainSetting = settingsManager.getSettingValue(Setting.CHAIN_POINTS.name)
+        val notifTimeSetting = settingsManager.getSettingValue(Setting.NOTIFICATION_TIME)
+        val chainSetting = settingsManager.getSettingValue(Setting.CHAIN_POINTS)
 
         assertThat(notifTimeSetting).isEqualTo(79200)
         assertThat(chainSetting).isEqualTo(1)
@@ -54,20 +50,20 @@ class SettingsManagerTest: AbstractObjectBoxTest() {
 
     @Test
     fun resetToDefault() {
-        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME.name, 1000)
-        settingsManager.resetToDefault(Setting.NOTIFICATION_TIME.name)
+        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME, 1000)
+        settingsManager.resetToDefault(Setting.NOTIFICATION_TIME)
 
-        val notifTimeSetting = settingsManager.getSettingValue(Setting.NOTIFICATION_TIME.name)
+        val notifTimeSetting = settingsManager.getSettingValue(Setting.NOTIFICATION_TIME)
 
         assertThat(notifTimeSetting).isEqualTo(79200)
     }
 
     @Test
     fun setAndGetSettingValue() {
-        settingsManager.setSettingValue(Setting.DELAYED_DAYS.name, 2)
-        settingsManager.setSettingValue(Setting.DELAYED_DAYS.name, 1)
+        settingsManager.setSettingValue(Setting.DELAYED_DAYS, 2)
+        settingsManager.setSettingValue(Setting.DELAYED_DAYS, 1)
 
-        val loaded = settingsManager.getSettingValue(Setting.DELAYED_DAYS.name)
+        val loaded = settingsManager.getSettingValue(Setting.DELAYED_DAYS)
 
         assertThat(loaded).isEqualTo(1)
     }
@@ -75,13 +71,13 @@ class SettingsManagerTest: AbstractObjectBoxTest() {
     @Test
     fun checkSettingObserver() {
         val observer = SettingChangeObserver()
-        val subscriber = settingsManager.addSettingObserver(Setting.NOTIFICATION_TIME.name, observer)
-        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME.name, 10000)
+        val subscriber = settingsManager.addSettingObserver(Setting.NOTIFICATION_TIME, observer)
+        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME, 10000)
 
         Thread.sleep(500)
 
         settingsManager.removeObserver(subscriber)
-        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME.name, 5000)
+        settingsManager.setSettingValue(Setting.NOTIFICATION_TIME, 5000)
 
         assertThat (observer.settingName).isEqualTo(Setting.NOTIFICATION_TIME.name)
         assertThat (observer.settingValue).isEqualTo(10000)

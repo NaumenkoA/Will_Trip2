@@ -1,0 +1,187 @@
+package com.alex.willtrip.di
+
+import com.alex.willtrip.core.do_manager.DoManager
+import com.alex.willtrip.core.do_manager.implementations.DoLoaderImp
+import com.alex.willtrip.core.do_manager.implementations.DoMutatorImp
+import com.alex.willtrip.core.do_manager.implementations.DoSubscriberImp
+import com.alex.willtrip.core.do_manager.interfaces.DoLoader
+import com.alex.willtrip.core.do_manager.interfaces.DoMutator
+import com.alex.willtrip.core.do_manager.interfaces.DoSubscriber
+import com.alex.willtrip.core.do_manager.period.DaysOfWeekBehavior
+import com.alex.willtrip.core.do_manager.period.EveryDayBehavior
+import com.alex.willtrip.core.do_manager.period.EveryNDaysBehavior
+import com.alex.willtrip.core.do_manager.period.NTimesAWeekBehavior
+import com.alex.willtrip.core.result.ResultManager
+import com.alex.willtrip.core.result.implementations.*
+import com.alex.willtrip.core.result.interfaces.*
+import com.alex.willtrip.core.settings.SettingAccessorImp
+import com.alex.willtrip.core.settings.SettingDefaulter
+import com.alex.willtrip.core.settings.SettingsManager
+import com.alex.willtrip.core.settings.interfaces.SettingAccessor
+import com.alex.willtrip.core.settings.interfaces.SettingSubscriber
+import com.alex.willtrip.core.settings.interfaces.SettingToDefault
+import com.alex.willtrip.core.settings.interfaces.SettingsDB
+import com.alex.willtrip.core.skipped.SkippedResultsManager
+import com.alex.willtrip.core.willpower.Mutator
+import com.alex.willtrip.core.willpower.WPManager
+import com.alex.willtrip.core.willpower.WillPower
+import com.alex.willtrip.core.willpower.interfaces.WPMutator
+import com.alex.willtrip.objectbox.class_boxes.SettingsObjectbox
+import com.alex.willtrip.objectbox.class_boxes.WPObjectbox
+import com.alex.willtrip.objectbox.helpers.DateSaver
+import dagger.Component
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
+
+@Singleton
+@Component(modules = [DoManagerModule::class, ResultManagerModule::class, SettingsModule::class,
+    WPModule::class, SkippedResultManagerModule::class])
+interface AppComponent {
+    fun doManager(): DoManager
+    fun resultManager(): ResultManager
+    fun settingsManager(): SettingsManager
+    fun wpManager(): WPManager
+    fun skippedResultsManager(): SkippedResultsManager
+}
+
+@Module
+class DoManagerModule {
+
+    @Singleton
+    @Provides
+    fun provideDoManager (mutator: DoMutator, loader: DoLoader, subcriber: DoSubscriber): DoManager {
+        return DoManager (mutator, subcriber, loader)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMutator(): DoMutator = DoMutatorImp()
+
+    @Singleton
+    @Provides
+    fun provideLoader(): DoLoader = DoLoaderImp()
+
+    @Singleton
+    @Provides
+    fun provideSubscriber(): DoSubscriber = DoSubscriberImp()
+}
+
+@Module
+class ResultManagerModule {
+
+    @Singleton
+    @Provides
+    fun provideResultManager (chainLoader: ChainLoader, chainWPCounter: ChainWPCounter,
+                              mutator: ResultMutator, loader: ResultLoader, subcriber: ResultSubscriber
+    ): ResultManager {
+        return ResultManager (chainLoader, chainWPCounter, loader, mutator, subcriber)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMutator(): ResultMutator = ResultMutatorImp()
+
+    @Singleton
+    @Provides
+    fun provideLoader(): ResultLoader = ResultLoaderImp()
+
+    @Singleton
+    @Provides
+    fun provideSubscriber(): ResultSubscriber = ResultSubscriberImp()
+
+    @Singleton
+    @Provides
+    fun provideChainLoader(): ChainLoader = ChainLoaderImp()
+
+    @Singleton
+    @Provides
+    fun provideChainWPCounter(): ChainWPCounter = ChainWPCounterImp()
+}
+
+@Module
+class SettingsModule {
+
+    @Singleton
+    private val objectbox = SettingsObjectbox()
+
+    @Singleton
+    @Provides
+    fun providesSettingsManager(accessor: SettingAccessor, subscriber: SettingSubscriber, defaulter: SettingToDefault
+    ): SettingsManager {
+        return SettingsManager (accessor, subscriber, defaulter)
+    }
+
+
+    @Singleton
+    @Provides
+    fun providesAccessor(settingsDB: SettingsDB): SettingAccessor {
+        return SettingAccessorImp(settingsDB)
+    }
+
+    @Singleton
+    @Provides
+    fun providesDB(): SettingsDB {
+        return objectbox
+    }
+
+    @Singleton
+    @Provides
+    fun providesSubscriber(): SettingSubscriber {
+        return objectbox
+    }
+
+    @Singleton
+    @Provides
+    fun providesDefault(settingsDB: SettingsDB): SettingToDefault {
+        return SettingDefaulter(settingsDB)
+    }
+}
+
+@Module
+class WPModule {
+
+    @Singleton
+    @Provides
+    fun providesWPManager(
+        mutator: WPMutator,
+        loader: WPObjectbox,
+        messenger: WPObjectbox
+    ): WPManager {
+        return WPManager(mutator, loader, messenger)
+    }
+
+
+    @Singleton
+    @Provides
+    fun providesMutator(): WPMutator {
+        return Mutator()
+    }
+
+    @Singleton
+    @Provides
+    fun providesWillPower(): WillPower {
+        return WillPower()
+    }
+
+    @Singleton
+    @Provides
+    fun providesWPObjectbox(): WPObjectbox {
+        return WPObjectbox()
+    }
+}
+
+@Module
+class SkippedResultManagerModule {
+
+    @Singleton
+    @Provides
+    fun providesDateSaver() = DateSaver()
+
+    @Singleton
+    @Provides
+    fun providesSkippedResultManager(doManager: DoManager,resultManager: ResultManager,
+                                     wPManager: WPManager, settingManager: SettingsManager,
+                                     dateSaver: DateSaver
+    ): SkippedResultsManager = SkippedResultsManager(doManager, resultManager, wPManager, settingManager, dateSaver)
+}

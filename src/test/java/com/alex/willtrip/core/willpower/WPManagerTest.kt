@@ -1,6 +1,6 @@
 package com.alex.willtrip.core.willpower
 import com.alex.willtrip.AbstractObjectBoxTest
-import com.alex.willtrip.di.DaggerWPComponent
+import com.alex.willtrip.di.DaggerAppComponent
 import org.junit.Test
 import com.google.common.truth.Truth.assertThat
 import io.objectbox.reactive.DataObserver
@@ -8,12 +8,11 @@ import org.junit.Before
 
 class WPManagerTest: AbstractObjectBoxTest() {
 
-
         lateinit var wpManager: WPManager
 
         @Before
         fun setUp() {
-            wpManager = DaggerWPComponent.create().wpManager()
+            wpManager = DaggerAppComponent.builder().build().wpManager()
         }
 
 
@@ -49,7 +48,7 @@ class WPManagerTest: AbstractObjectBoxTest() {
 
     @Test
     fun checkWPNotLessThanZero() {
-        val currentWP = wpManager.increaseWP(10)
+        wpManager.increaseWP(10)
         val newWP = wpManager.decreaseWP(1000)
         assertThat(newWP).isEqualTo(0)
     }

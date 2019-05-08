@@ -23,7 +23,7 @@ import javax.inject.Scope
     }
 
     @BehaviorScope
-    @Component (dependencies = [SettingsComponent::class],
+    @Component (dependencies = [AppComponent::class],
         modules = [ResultLoaderModule::class, EveryNDaysBehaviorModule::class])
     interface EveryNDaysBehaviorComponent  {
         fun everyNDaysBehavior(): EveryNDaysBehavior

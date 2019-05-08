@@ -16,7 +16,7 @@ class DoMutatorImp: DoMutator {
     }
 
     override fun removeDo(doId: Long) {
-        val doDB = getDoDBBox().query().equal(DoDB_.id, doId).build().findUnique() ?: throw IllegalArgumentException ("${DoMutatorImp::class.java.simpleName}: " +
+        getDoDBBox().query().equal(DoDB_.id, doId).build().findUnique() ?: throw IllegalArgumentException ("${DoMutatorImp::class.java.simpleName}: " +
                 "no Do object with ID: \"$doId\" was found. Delete operation wasn't successful")
         getDoDBBox().remove(doId)
     }

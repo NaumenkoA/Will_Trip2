@@ -7,6 +7,6 @@ import org.threeten.bp.LocalDate
 interface ResultMutator {
     fun addResult (result: Result)
     fun removeAllResults (doId: Long)
-    fun removeResult (result: Result)
+    fun removeResult (result: Result): Boolean
     fun removeResult (doId: Long, date: LocalDate)
 }

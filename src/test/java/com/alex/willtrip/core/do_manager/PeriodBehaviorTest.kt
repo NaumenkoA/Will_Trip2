@@ -19,12 +19,12 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
 
     @Before
     fun setUp() {
-        doManager = DaggerDoManagerComponent.create().doManager()
+        doManager = DaggerAppComponent.builder().build().doManager()
     }
 
     @Test
     fun everyDayBehaviorTest() {
-        val doEveryDay = Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
+        val doEveryDay = Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
             startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
 
@@ -42,7 +42,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         doEveryDay.id = doManager.addNewDo(doEveryDay)
 
         val result1 = Result(doId = doEveryDay.id, date = LocalDate.of(2019, 5, 1),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
 
         resultMutator.addResult(result1)
 
@@ -50,7 +50,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isAvailOnResult1Day = doEveryDay.isAvailableOnDate(LocalDate.of(2019, 5,1))
 
         val result2 = Result(doId = doEveryDay.id, date = LocalDate.of(2019, 5, 2),
-            resultType = Result.ResultType.SKIPPED.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.SKIPPED, isPositive = false, wpPoint = 5, chainPoint = 1)
 
         resultMutator.addResult(result2)
 
@@ -58,7 +58,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isAvailOnResult2Day = doEveryDay.isAvailableOnDate(LocalDate.of(2019, 5,2))
 
         val result3 = Result(doId = doEveryDay.id, date = LocalDate.of(2019, 5, 3),
-            resultType = Result.ResultType.SPECIAL_DAY.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.SPECIAL_DAY, isPositive = false, wpPoint = 5, chainPoint = 1)
 
         resultMutator.addResult(result3)
 
@@ -117,7 +117,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnSun= doDaysOfWeek.isObligatoryOnDate(LocalDate.of(2019, 5,12))
 
         val result1 = Result(doId = doDaysOfWeek.id, date = LocalDate.of(2019, 5, 8),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
 
         resultMutator.addResult(result1)
 
@@ -125,7 +125,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isAvailOnResult1Day = doDaysOfWeek.isAvailableOnDate(LocalDate.of(2019, 5,8))
 
         val result2 = Result(doId = doDaysOfWeek.id, date = LocalDate.of(2019, 5, 6),
-            resultType = Result.ResultType.SKIPPED.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.SKIPPED, isPositive = false, wpPoint = 5, chainPoint = 1)
 
         resultMutator.addResult(result2)
 
@@ -133,7 +133,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isAvailOnResult2Day = doDaysOfWeek.isAvailableOnDate(LocalDate.of(2019, 5,6))
 
         val result3 = Result(doId = doDaysOfWeek.id, date = LocalDate.of(2019, 5, 11),
-            resultType = Result.ResultType.SPECIAL_DAY.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.SPECIAL_DAY, isPositive = false, wpPoint = 5, chainPoint = 1)
 
         resultMutator.addResult(result3)
 
@@ -194,7 +194,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnMon = nTimesAWeekBeh.isObligatoryOnDate(LocalDate.of(2019, 5,6))
 
         val result0 = Result(doId = nTimesAWeekBeh.id, date = LocalDate.of(2019, 5, 6),
-            resultType = Result.ResultType.SKIPPED.name, isPositive = false, wpPoint = 0, chainPoint =0)
+            resultType = Result.ResultType.SKIPPED, isPositive = false, wpPoint = 0, chainPoint =0)
         resultMutator.addResult(result0)
 
         val isAvailOnMonAftResult = nTimesAWeekBeh.isAvailableOnDate(LocalDate.of(2019, 5,6))
@@ -204,14 +204,14 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnTue = nTimesAWeekBeh.isObligatoryOnDate(LocalDate.of(2019, 5,7))
 
         val result1 = Result(doId = nTimesAWeekBeh.id, date = LocalDate.of(2019, 5, 7),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result1)
 
         val isAvailOnWed = nTimesAWeekBeh.isAvailableOnDate(LocalDate.of(2019, 5,8))
         val isOblOnWed = nTimesAWeekBeh.isObligatoryOnDate(LocalDate.of(2019, 5,8))
 
         val result2 = Result(doId = nTimesAWeekBeh.id, date = LocalDate.of(2019, 5, 8),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result2)
 
         val isAvailOnResultDay = nTimesAWeekBeh.isAvailableOnDate(LocalDate.of(2019, 5,8))
@@ -221,7 +221,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnThu = nTimesAWeekBeh.isObligatoryOnDate(LocalDate.of(2019, 5,9))
 
         val result3 = Result(doId = nTimesAWeekBeh.id, date = LocalDate.of(2019, 5, 9),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result3)
 
         val isAvailOnFri = nTimesAWeekBeh.isAvailableOnDate(LocalDate.of(2019, 5,10))
@@ -267,7 +267,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
 
     @Test
     fun testEveryNDaysNotStrict() {
-        val behavior = DaggerEveryNDaysBehaviorComponent.builder().settingsComponent(DaggerSettingsComponent.create()).
+        val behavior = DaggerEveryNDaysBehaviorComponent.builder().appComponent(DaggerAppComponent.create()).
             everyNDaysBehaviorModule(EveryNDaysBehaviorModule(3))
             .build().everyNDaysBehavior()
 
@@ -277,9 +277,9 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
 
         everyNDays.id = doManager.addNewDo(everyNDays)
 
-        val settingManager = DaggerSettingsComponent.create().settingsManager()
+        val settingManager = DaggerAppComponent.builder().build().settingsManager()
 
-        settingManager.setSettingValue(Setting.EVERY_N_DAYS_STRICT.name, 0)
+        settingManager.setSettingValue(Setting.EVERY_N_DAYS_STRICT, 0)
 
         val isOblBeforeStart = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 3,1))
         val isAvailBeforeStart = everyNDays.isAvailableOnDate(LocalDate.of(2019, 3, 1))
@@ -292,7 +292,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnFirst = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 4,1))
 
         val result0 = Result(doId = everyNDays.id, date = LocalDate.of(2019, 4, 1),
-            resultType = Result.ResultType.SKIPPED.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.SKIPPED, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result0)
 
         val isAvailOnFirstAfterResult = everyNDays.isAvailableOnDate(LocalDate.of(2019, 4,1))
@@ -304,7 +304,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnThird = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 4,3))
 
         val result1 = Result(doId = everyNDays.id, date = LocalDate.of(2019, 4, 3),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result1)
 
         val isAvailOnFour = everyNDays.isAvailableOnDate(LocalDate.of(2019, 4,4))
@@ -313,7 +313,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnFive = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 4,5))
 
         val result2 = Result(doId = everyNDays.id, date = LocalDate.of(2019, 4, 5),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 3, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 3, chainPoint = 1)
         resultMutator.addResult(result2)
 
         val isAvailOnResultDay = everyNDays.isAvailableOnDate(LocalDate.of(2019, 4,5))
@@ -327,7 +327,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnEight = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 4,8))
 
         val result3 = Result(doId = everyNDays.id, date = LocalDate.of(2019, 4, 6),
-            resultType = Result.ResultType.SPECIAL_DAY.name, isPositive = false, wpPoint = 3, chainPoint = 1)
+            resultType = Result.ResultType.SPECIAL_DAY, isPositive = false, wpPoint = 3, chainPoint = 1)
         resultMutator.addResult(result3)
 
         val isAvailOnEightAfterSD = everyNDays.isAvailableOnDate(LocalDate.of(2019, 4,8))
@@ -371,7 +371,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
 
     @Test
     fun testEveryNDaysStrict() {
-        val behavior = DaggerEveryNDaysBehaviorComponent.builder().settingsComponent(DaggerSettingsComponent.create()).
+        val behavior = DaggerEveryNDaysBehaviorComponent.builder().appComponent(DaggerAppComponent.create()).
             everyNDaysBehaviorModule(EveryNDaysBehaviorModule(3))
             .build().everyNDaysBehavior()
 
@@ -381,9 +381,9 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
 
         everyNDays.id = doManager.addNewDo(everyNDays)
 
-        val settingManager = DaggerSettingsComponent.create().settingsManager()
+        val settingManager = DaggerAppComponent.builder().build().settingsManager()
 
-        settingManager.setSettingValue(Setting.EVERY_N_DAYS_STRICT.name, 1)
+        settingManager.setSettingValue(Setting.EVERY_N_DAYS_STRICT, 1)
 
         val isOblBeforeStart = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 3,1))
         val isAvailBeforeStart = everyNDays.isAvailableOnDate(LocalDate.of(2019, 3, 1))
@@ -398,14 +398,14 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnSec = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 4,2))
 
         val result0 = Result(doId = everyNDays.id, date = LocalDate.of(2019, 4, 2),
-            resultType = Result.ResultType.SKIPPED.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.SKIPPED, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result0)
 
         val isAvailOnThird = everyNDays.isAvailableOnDate(LocalDate.of(2019, 4,3))
         val isOblOnThird = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 4,3))
 
         val result1 = Result(doId = everyNDays.id, date = LocalDate.of(2019, 4, 3),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result1)
 
         val isAvailOnFour = everyNDays.isAvailableOnDate(LocalDate.of(2019, 4,4))
@@ -416,7 +416,7 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val isOblOnSix = everyNDays.isObligatoryOnDate(LocalDate.of(2019, 4,6))
 
         val result2 = Result(doId = everyNDays.id, date = LocalDate.of(2019, 4, 6),
-            resultType = Result.ResultType.SPECIAL_DAY.name, isPositive = false, wpPoint = 3, chainPoint = 1)
+            resultType = Result.ResultType.SPECIAL_DAY, isPositive = false, wpPoint = 3, chainPoint = 1)
         resultMutator.addResult(result2)
 
         val isAvailOnResultDay = everyNDays.isAvailableOnDate(LocalDate.of(2019, 4,6))
@@ -462,17 +462,15 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         val loader = ResultLoaderImp()
 
         val result1 = Result(doId = 10, date = LocalDate.of(2019, 4, 3),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 5, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
         resultMutator.addResult(result1)
 
         val result2 = Result(doId = 10, date = LocalDate.of(2019, 4, 5),
-            resultType = Result.ResultType.DONE.name, isPositive = false, wpPoint = 3, chainPoint = 1)
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 3, chainPoint = 1)
         resultMutator.addResult(result2)
 
-        val result = loader.getLastResults(10, 1)
-        val results = loader.loadResultsForPeriod(10, LocalDate.of(2019, 4, 1),
-            LocalDate.of(2019, 4, 30))
+        val result = loader.getLastResult(10, Result.ResultType.DEFAULT)
 
-        assertThat(result[0]).isEqualTo(result2)
+        assertThat(result).isEqualTo(result2)
     }
 }

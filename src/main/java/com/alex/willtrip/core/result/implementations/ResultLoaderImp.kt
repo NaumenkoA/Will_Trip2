@@ -14,9 +14,15 @@ class ResultLoaderImp: ResultLoader {
         return ObjectBox.boxStore.boxFor(Result::class.java)
     }
 
-    override fun loadResultsForPeriod(doId: Long, startDate: LocalDate, endDate: LocalDate): List<Result>? {
+    override fun loadResultsForPeriod(
+        doId: Long,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        exceptType: Result.ResultType
+    ): List<Result>? {
         return getResultBox().query().equal(Result_.doId, doId)
-            .between(Result_.date, startDate.toEpochDay(), endDate.toEpochDay()).build().find()
+            .between(Result_.date, startDate.toEpochDay(), endDate.toEpochDay()).
+                notEqual(Result_.resultType, exceptType.uid.toLong()).build().find()
     }
 
     override fun loadResultForDate(doId: Long, date: LocalDate): Result? {
@@ -24,20 +30,16 @@ class ResultLoaderImp: ResultLoader {
             .findUnique()
     }
 
-    override fun getLastResults(doId: Long, numberOfResults: Int): List<Result> {
-        val allResults =
-            getResultBox().query().equal(Result_.doId, doId).order(Result_.date, QueryBuilder.DESCENDING).build().find()
-
-        return if (allResults.size <= numberOfResults) allResults
-        else allResults.subList(0, numberOfResults)
+    override fun getNLastResults(doId: Long, numberOfResults: Int, exceptType: Result.ResultType): List<Result> {
+       return getResultBox().query().equal(Result_.doId, doId).
+           notEqual(Result_.resultType, exceptType.uid.toLong()).
+           order(Result_.date, QueryBuilder.DESCENDING).build().find(0, numberOfResults.toLong())
     }
 
-    override fun getLastNonSkippedResults(doId: Long, numberOfResults: Int): List<Result> {
-        val allResults =
-            getResultBox().query().equal(Result_.doId, doId).notEqual(Result_.resultType, Result.ResultType.SKIPPED.name).order(Result_.date, QueryBuilder.DESCENDING).build().find()
-
-        return if (allResults.size <= numberOfResults) allResults
-        else allResults.subList(0, numberOfResults)
+    override fun getLastResult(doId: Long, exceptType: Result.ResultType): Result? {
+        val list = getResultBox().query().equal(Result_.doId, doId).notEqual(Result_.resultType, exceptType.uid.toLong()).
+                orderDesc(Result_.date).build().find(0, 1)
+        return if (list.isNotEmpty()) list[0]
+        else null
     }
-
 }

@@ -2,10 +2,15 @@ package com.alex.willtrip.extensions
 
 import com.alex.willtrip.core.do_manager.Do
 import com.alex.willtrip.core.do_manager.period.*
+import com.alex.willtrip.core.story.objects.*
 import com.alex.willtrip.di.*
 import com.alex.willtrip.objectbox.class_boxes.DoDB
+import com.alex.willtrip.objectbox.class_boxes.ObstacleDB
+import com.alex.willtrip.objectbox.class_boxes.ObstacleType
+import com.alex.willtrip.objectbox.class_boxes.ObstacleType.*
 import com.alex.willtrip.objectbox.class_boxes.PeriodBehaviourType
 import java.lang.Exception
+import java.lang.IllegalArgumentException
 
 fun Boolean.toInt(): Int {
     return if (this) 1 else 0
@@ -80,3 +85,58 @@ fun DoDB.toDo(): Do {
     return Do (id, name, periodBehavior, note, isPositive, complexity, isSpecialDayEnabled, startDate, expireDate)
 }
 
+fun Story.getRandomLink (firstLink: Int, secondLink: Int):Int {
+    val random = java.util.Random()
+    val int = random.nextInt(2)
+    when (int) {
+        0 -> return firstLink
+        1 -> return secondLink
+        else -> return firstLink
+    }
+}
+
+fun Obstacle.toObstacleDB (): ObstacleDB {
+    when (this) {
+        is ObstacleWP -> return ObstacleDB(link = this.link, textId = this.textId, addValue = this.addValue,
+            minValue = this.minValue, totalValue = this.totalValue, type = WP
+        )
+
+        is ObstacleComp -> return ObstacleDB(link = this.link, textId = this.textId, totalValue = this.totalValue,
+            type = COMP
+        )
+
+        is ObstacleChain -> return ObstacleDB(link = this.link, textId = this.textId, addValue = this.addValue,
+            minValue = this.minValue, totalValue = this.totalValue, type = CHAIN
+        )
+
+        is ObstacleCount -> return ObstacleDB(link = this.link, textId = this.textId, addValue = this.addValue,
+            minValue = this.minValue, totalValue = this.totalValue, type = COUNT
+        )
+
+        is ObstacleBonus -> return ObstacleDB(link = this.link, textId = this.textId, isBonusGranted = this.isBonusGranted,
+            totalValue = this.totalValue, type = BONUS
+        )
+
+        else -> throw IllegalArgumentException ("No such type of Obstacle: ${this::class.java.simpleName} was found")
+    }
+}
+
+fun ObstacleDB.toObstacle(): Obstacle {
+    return when (this.type) {
+        WP -> ObstacleWP(link, textId, addValue, minValue, totalValue)
+        COMP -> ObstacleComp(link, textId, totalValue)
+        CHAIN -> ObstacleChain(link, textId, addValue, minValue, totalValue)
+        COUNT -> ObstacleCount(link, textId, addValue, minValue, totalValue)
+        BONUS -> ObstacleBonus(link, textId, isBonusGranted, totalValue)
+        else -> throw IllegalArgumentException("Illegal ObstacleDB type: ${this.type} at convert operation to Obstacle")
+    }
+}
+
+fun List<Obstacle>.convertToObstacleDBList(): List <ObstacleDB> {
+    val list = mutableListOf<ObstacleDB>()
+
+    this.forEach {
+        list.add (it.toObstacleDB())
+    }
+    return list
+}

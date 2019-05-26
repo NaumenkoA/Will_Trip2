@@ -22,6 +22,9 @@ import com.alex.willtrip.core.settings.interfaces.SettingSubscriber
 import com.alex.willtrip.core.settings.interfaces.SettingToDefault
 import com.alex.willtrip.core.settings.interfaces.SettingsDB
 import com.alex.willtrip.core.skipped.SkippedResultsManager
+import com.alex.willtrip.core.story.StoryManager
+import com.alex.willtrip.core.story.implementations.*
+import com.alex.willtrip.core.story.interfaces.*
 import com.alex.willtrip.core.willpower.Mutator
 import com.alex.willtrip.core.willpower.WPManager
 import com.alex.willtrip.core.willpower.WillPower
@@ -36,13 +39,14 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [DoManagerModule::class, ResultManagerModule::class, SettingsModule::class,
-    WPModule::class, SkippedResultManagerModule::class])
+    WPModule::class, SkippedResultManagerModule::class, StoryModule::class])
 interface AppComponent {
     fun doManager(): DoManager
     fun resultManager(): ResultManager
     fun settingsManager(): SettingsManager
     fun wpManager(): WPManager
     fun skippedResultsManager(): SkippedResultsManager
+    fun storyManager(): StoryManager
 }
 
 @Module
@@ -184,4 +188,46 @@ class SkippedResultManagerModule {
                                      wPManager: WPManager, settingManager: SettingsManager,
                                      dateSaver: DateSaver
     ): SkippedResultsManager = SkippedResultsManager(doManager, resultManager, wPManager, settingManager, dateSaver)
+}
+
+@Module
+class StoryModule {
+
+    @Singleton
+    @Provides
+    fun providesStoryManager (obstacleLoader: ObstacleLoader, obstacleResolver: ObstacleResolver,
+                              sceneLoader: SceneLoader, subscriber: SceneSubscriber, storyLoader: StoryLoader): StoryManager{
+        return StoryManager(obstacleLoader, obstacleResolver, sceneLoader, subscriber, storyLoader)
+    }
+
+    @Singleton
+    @Provides
+    fun providesObstacleLoader (wPManager: WPManager, doManager: DoManager,
+                                resultManager: ResultManager): ObstacleLoader{
+        return ObstacleLoaderImp (wPManager, doManager, resultManager)
+    }
+
+    @Singleton
+    @Provides
+    fun providesObstacleResolver(): ObstacleResolver {
+        return ObstacleResolverImp()
+    }
+
+    @Singleton
+    @Provides
+    fun providesSceneLoader(obstacleLoader: ObstacleLoader): SceneLoader {
+        return SceneLoaderImp(obstacleLoader)
+    }
+
+    @Singleton
+    @Provides
+    fun providesSceneSubscriber(): SceneSubscriber {
+        return SceneSubscriberImp()
+    }
+
+    @Singleton
+    @Provides
+    fun storyLoader(): StoryLoader {
+        return StoryLoaderImp()
+    }
 }

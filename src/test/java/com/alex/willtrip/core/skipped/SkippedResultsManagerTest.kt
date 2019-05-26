@@ -449,7 +449,5 @@ class SkippedResultsManagerTest: AbstractObjectBoxTest() {
 
         assertThat(f4&&f5&&f6).isFalse()
     }
-
-
     }
 

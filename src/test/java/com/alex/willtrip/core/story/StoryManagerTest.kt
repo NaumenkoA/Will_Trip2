@@ -23,6 +23,7 @@ class StoryManagerTest: AbstractObjectBoxTest() {
     lateinit var wpManager: WPManager
     lateinit var resultManager: ResultManager
     lateinit var doManager: DoManager
+    var obstacleCount: Int = 0
     val currentDate = LocalDate.of(2019, 5,26)
 
     @Before
@@ -188,6 +189,8 @@ class StoryManagerTest: AbstractObjectBoxTest() {
     fun goThroughStory() {
         storyManager.loadNewStory(Story())
 
+        obstacleCount = 0
+
         while (storyManager.getCurrentScene(currentDate).options[0].nextSceneLink != null) {
             resolveObstacles()
 
@@ -197,12 +200,15 @@ class StoryManagerTest: AbstractObjectBoxTest() {
 
         val currentLink = storyManager.getCurrentScene(currentDate).link
         assertThat(currentLink).isEqualTo(53)
+        assertThat(obstacleCount).isEqualTo(14)
     }
 
     private fun resolveObstacles() {
         if (!storyManager.checkObstaclesResolved(currentDate)) {
+
             val obstacles = storyManager.getCurrentScene(currentDate).obstacles
             obstacles.forEach {
+                obstacleCount++
                 when (it) {
                     is ObstacleWP -> {
                         val diff = it.totalValue - wpManager.getCurrentWP()

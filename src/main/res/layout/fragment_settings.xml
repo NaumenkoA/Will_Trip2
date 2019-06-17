@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.SettingsFragment">
+
+    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                 android:layout_height="wrap_content">
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/guideline" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/chainPointsSwitch"
+            android:text="@string/chain_points_settings_hint"
+            android:textSize="12sp" app:layout_constraintEnd_toStartOf="@+id/guideline3"
+    />
+        <TextView
+                android:text="@string/settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="24dp"
+                app:layout_constraintTop_toTopOf="parent" android:textSize="24sp"/>
+    <android.support.constraint.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:layout_constraintGuide_begin="30dp" android:id="@+id/guideline"/>
+    <android.support.constraint.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline2"
+            app:layout_constraintGuide_end="40dp"/>
+    <android.support.constraint.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline3" app:layout_constraintGuide_end="120dp"/>
+    <TextView
+            android:text="@string/delayed_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/textView7"/>
+    <TextView
+            android:text="@string/notification_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" android:textStyle="italic"
+            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="@+id/guideline"/>
+    <Switch
+            android:text="@string/chain_points"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/chainPointsSwitch"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+    />
+    <Switch
+            android:text="@string/special_days"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sdSwitch"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/textView2"/>
+    <Switch
+            android:text="@string/notifications"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/notificationsSwitch" app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline" android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"/>
+    <TextView
+            android:text="@string/notifications_settings_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/notificationsSwitch" android:textSize="12sp"/>
+    <TextView
+            android:text="@string/_22_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notificationTimeTextView" tools:text="22:00" app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:layout_marginEnd="8dp" app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+            android:textStyle="italic"/>
+    <TextView
+            android:text="@string/delay_settings_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10" app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" android:textSize="12sp"/>
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weekStartsFromSpinner" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:layout_marginEnd="8dp"/>
+    <TextView
+            android:text="@string/special_days_settings_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/sdSwitch" app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:textSize="12sp"/>
+    <TextView
+            android:text="@string/week_starts_from"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/delayDaysSpinner"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:layout_marginEnd="8dp" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"/>
+    <Switch
+            android:text="@string/every_few_days_strict"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/everyNDaysStrictSwitch" app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/textView11"/>
+        <TextView
+                android:text="@string/every_n_days_settings_hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/everyNDaysStrictSwitch" app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline"
+                android:layout_marginStart="8dp" android:textSize="12sp" android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

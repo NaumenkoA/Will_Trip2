@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_habits"
+          android:title="@string/habits"
+          android:icon="@drawable/ic_format_list_bulleted_black_48dp" />
+    <item android:id="@+id/action_today"
+          android:title="@string/today"
+          android:icon="@drawable/ic_today_black_48dp" />
+    <item android:id="@+id/action_trip_mode"
+          android:title="@string/will_trip"
+          android:icon="@drawable/ic_art_track_black_48dp" />
+    <item android:id="@+id/action_settings"
+          android:title="@string/settings"
+          android:icon="@drawable/baseline_settings_black_48" />
+</menu>

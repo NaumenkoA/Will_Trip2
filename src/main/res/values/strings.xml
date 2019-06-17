@@ -1,68 +1,181 @@
 <resources>
     <string name="app_name">Will Trip</string>
 
-    <string name="story_1">Loud knocking to the door woke you up in the morning. On the threshold you saw the confidant of the king. He kindly invited you to the Royal Palace, saying that the matter is urgent. The king himself is waiting for you.\n Approaching the Royal palace, you wonder why the king needs to talk to a simple blacksmith… </string>
-    <string name="story_2">My loyal subject, for the last time, my health began to weaken, and my sworn enemy King Bruenor from the southern lands is very powerful and aggressive.\n The Kingdom is in danger. If I die and the southerners come upon us, many innocent citizens of my Kingdom will perish.</string>
-    <string name="story_3">Beyond the dry lands, on the East, the dark wizard lives. He possesses secret and powerful spell. If you come back with this spell, the Kingdom can be saved. You are known as one of the best blacksmiths of the Kingdom, your hand is strong and your will is like a steel. I ask you to do this favour for me.</string>
-    <string name="story_4">The king has blessed you and wished you not to surrender in the face of difficulties. You have left the Palace and are ready to start the journey.</string>
-    <string name="story_5">You\'ve come to the Eastern gates of the city. At the gates you met a guard who is interested in where you are going.</string>
-    <string name="story_6">You told the guard about your plans to go beyond the Arden forest. He is very concerned about your story, and wishes you the help of the Almighty God.</string>
-    <string name="story_7">No one has entered the Arden forest for many years. Rumor has it that at night there is a huge howl from the wolves, and at dawn you can meet the dead mermaids floating in the forest mist. Behind the Arden forest there are dry lands where you will give all your gold for a drop of water.</string>
-    <string name="story_8">You came out to the East to the big valley. You enjoy fine weather, a light wind breezing blowing and birds sing. You have two days journey to the Arden forest through the valley.</string>
+    <string name="story_1">Loud knocking to the door woke you up in the morning. On the threshold you saw the confidant
+        of the king. He kindly invited you to the Royal Palace, saying that the matter is urgent. The king himself is
+        waiting for you.\n Approaching the Royal palace, you wonder why the king needs to talk to a simple blacksmith…
+    </string>
+    <string name="story_2">My loyal subject, for the last time, my health began to weaken, and my sworn enemy King
+        Bruenor from the southern lands is very powerful and aggressive.\n The Kingdom is in danger. If I die and the
+        southerners come upon us, many innocent citizens of my Kingdom will perish.
+    </string>
+    <string name="story_3">Beyond the dry lands, on the East, the dark wizard lives. He possesses secret and powerful
+        spell. If you come back with this spell, the Kingdom can be saved. You are known as one of the best blacksmiths
+        of the Kingdom, your hand is strong and your will is like a steel. I ask you to do this favour for me.
+    </string>
+    <string name="story_4">The king has blessed you and wished you not to surrender in the face of difficulties. You
+        have left the Palace and are ready to start the journey.
+    </string>
+    <string name="story_5">You\'ve come to the Eastern gates of the city. At the gates you met a guard who is interested
+        in where you are going.
+    </string>
+    <string name="story_6">You told the guard about your plans to go beyond the Arden forest. He is very concerned about
+        your story, and wishes you the help of the Almighty God.
+    </string>
+    <string name="story_7">No one has entered the Arden forest for many years. Rumor has it that at night there is a
+        huge howl from the wolves, and at dawn you can meet the dead mermaids floating in the forest mist. Behind the
+        Arden forest there are dry lands where you will give all your gold for a drop of water.
+    </string>
+    <string name="story_8">You came out to the East to the big valley. You enjoy fine weather, a light wind breezing
+        blowing and birds sing. You have two days journey to the Arden forest through the valley.
+    </string>
     <string name="story_9">The Great valley is beautiful, but you have long way to go.</string>
-    <string name="story_10">You have passed the green valley and reached the edge of the Arden forest. There are many bad rumors about this forest, it\'s time to check which of them are true.</string>
-    <string name="story_11">You passed some distance in the woods before dark. Strange rustling is heard around, in the distance you hear lingering howl of wolves. You need to sleep, but how to do it in such a disturbing environment?</string>
-    <string name="story_12">You need to fall asleep in order to have the strength to continue the trip tomorrow.</string>
-    <string name="story_13">In the dream you see a dark forest. The moon shines brightly through the trees. In the haze dark silhouette with a scythe is approaching you. The silhouette swings his scythe and screams \"Haaarrrrgh\".</string>
-    <string name="story_14">Waking up, you see a big muscular wolf right in front of you. The wolf bared his teeth and prepares to attack.</string>
-    <string name="story_15">You run away, dodging between trees, but the wolf does not lag behind and quickly overtakes you.</string>
-    <string name="story_16">Wolf catches you up and knocks you down. Now you see the hungry eyes and bared teeth.</string>
-    <string name="story_17">You grab a sharp stick, which lies next to you, and stab it into the wolf\'s throat. Blood splatters from the wound, and the wolf with a squeal jumps out of the way.</string>
-    <string name="story_18">You grab the wolf by the tongue and pull it with big force. Wolf jumps out of the way with a squeal, the blood pouring from his mouth. </string>
-    <string name="story_19">You leave the Arden forest, and on one of the trees in the distance you see a carved inscription. You wonder what is written there, but the wolf could still be somewhere nearby.</string>
-    <string name="story_20">On the tree the inscription is engraved:\n \"It is a rough road that leads to the heights of greatness\". </string>
-    <string name="story_21">You see a calm river in front of you. Looking around, you can\'t see the crossing on foot. Apparently, to continue the path you\'ll have to soak your feet.</string>
-    <string name="story_22">Already passing the middle of the river, you see a strange movement aside. You turn around to understand the source of this movement.</string>
-    <string name="story_23">You realize that the huge alligator is approaching you fast.You swim fast, but the alligator is even faster. You need to collect all your power not to stay at the bottom of this calm river forever.</string>
-    <string name="story_24">You spent the night away from the river. In the morning you can see dry lands stretching for miles in front of you. The earth is all cracked from dryness. A small pitcher of water here will be more expensive than gold.</string>
-    <string name="story_25">You are on the road for a few days, and the end of these dried up lands is still not visible. You\'re exhausted by heat and thirst. You want to lie down for a few hours, but you know you\'ll never get up.</string>
-    <string name="story_26">You continue your trip through the dry lands. You notice the skull of some animal laying on the ground. This land of death always takes its toll.</string>
-    <string name="story_27">You take the skull in your hands, when suddenly a snake crawls out of the orbit and bites you.</string>
-    <string name="story_28">You take out an oblong flask with water from an eye socket. You drink all the water, and immediately feel an inflow of forces.</string>
-    <string name="story_29">You went a few more miles through the dry lands. You need to collect all the forces not to die right here. Suddenly you hear scary sounds from the sky.</string>
-    <string name="story_30">You lift your head and you see a big desert eagle flying right at you, exposing its claws. A few more seconds, and it will take you to the place, from where no one has returned.</string>
+    <string name="story_10">You have passed the green valley and reached the edge of the Arden forest. There are many
+        bad rumors about this forest, it\'s time to check which of them are true.
+    </string>
+    <string name="story_11">You passed some distance in the woods before dark. Strange rustling is heard around, in the
+        distance you hear lingering howl of wolves. You need to sleep, but how to do it in such a disturbing
+        environment?
+    </string>
+    <string name="story_12">You need to fall asleep in order to have the strength to continue the trip tomorrow.
+    </string>
+    <string name="story_13">In the dream you see a dark forest. The moon shines brightly through the trees. In the haze
+        dark silhouette with a scythe is approaching you. The silhouette swings his scythe and screams \"Haaarrrrgh\".
+    </string>
+    <string name="story_14">Waking up, you see a big muscular wolf right in front of you. The wolf bared his teeth and
+        prepares to attack.
+    </string>
+    <string name="story_15">You run away, dodging between trees, but the wolf does not lag behind and quickly overtakes
+        you.
+    </string>
+    <string name="story_16">Wolf catches you up and knocks you down. Now you see the hungry eyes and bared teeth.
+    </string>
+    <string name="story_17">You grab a sharp stick, which lies next to you, and stab it into the wolf\'s throat. Blood
+        splatters from the wound, and the wolf with a squeal jumps out of the way.
+    </string>
+    <string name="story_18">You grab the wolf by the tongue and pull it with big force. Wolf jumps out of the way with a
+        squeal, the blood pouring from his mouth.
+    </string>
+    <string name="story_19">You leave the Arden forest, and on one of the trees in the distance you see a carved
+        inscription. You wonder what is written there, but the wolf could still be somewhere nearby.
+    </string>
+    <string name="story_20">On the tree the inscription is engraved:\n \"It is a rough road that leads to the heights of
+        greatness\".
+    </string>
+    <string name="story_21">You see a calm river in front of you. Looking around, you can\'t see the crossing on foot.
+        Apparently, to continue the path you\'ll have to soak your feet.
+    </string>
+    <string name="story_22">Already passing the middle of the river, you see a strange movement aside. You turn around
+        to understand the source of this movement.
+    </string>
+    <string name="story_23">You realize that the huge alligator is approaching you fast.You swim fast, but the alligator
+        is even faster. You need to collect all your power not to stay at the bottom of this calm river forever.
+    </string>
+    <string name="story_24">You spent the night away from the river. In the morning you can see dry lands stretching for
+        miles in front of you. The earth is all cracked from dryness. A small pitcher of water here will be more
+        expensive than gold.
+    </string>
+    <string name="story_25">You are on the road for a few days, and the end of these dried up lands is still not
+        visible. You\'re exhausted by heat and thirst. You want to lie down for a few hours, but you know you\'ll never
+        get up.
+    </string>
+    <string name="story_26">You continue your trip through the dry lands. You notice the skull of some animal laying on
+        the ground. This land of death always takes its toll.
+    </string>
+    <string name="story_27">You take the skull in your hands, when suddenly a snake crawls out of the orbit and bites
+        you.
+    </string>
+    <string name="story_28">You take out an oblong flask with water from an eye socket. You drink all the water, and
+        immediately feel an inflow of forces.
+    </string>
+    <string name="story_29">You went a few more miles through the dry lands. You need to collect all the forces not to
+        die right here. Suddenly you hear scary sounds from the sky.
+    </string>
+    <string name="story_30">You lift your head and you see a big desert eagle flying right at you, exposing its claws. A
+        few more seconds, and it will take you to the place, from where no one has returned.
+    </string>
     <string name="story_31">The desert eagle rushes towards you.</string>
-    <string name="story_32">You bounce to the side, and the eagle catches you with claws, cutting clothes and skin. You grab a stone lying on the ground, and when the eagle comes again, you beat it with a great force.</string>
-    <string name="story_33">Your clothes are covered in blood. The eagle managed to tear your shoulder and chest. But the wounds don\'t seem dangerous.</string>
-    <string name="story_34">Cautiously looking up to the sky, you have two days more continued the path through the dry lands. Finally, when the sun has already begun to set behind the horizon, you have reached the foot of the Dalai mountains.</string>
-    <string name="story_35">In the morning you see all the splendor and power of the mountain chain in front of you. Mountains stretch for kilometers, going beyond the horizon. There is no workaround, you need to overcome the mountain.</string>
+    <string name="story_32">You bounce to the side, and the eagle catches you with claws, cutting clothes and skin. You
+        grab a stone lying on the ground, and when the eagle comes again, you beat it with a great force.
+    </string>
+    <string name="story_33">Your clothes are covered in blood. The eagle managed to tear your shoulder and chest. But
+        the wounds don\'t seem dangerous.
+    </string>
+    <string name="story_34">Cautiously looking up to the sky, you have two days more continued the path through the dry
+        lands. Finally, when the sun has already begun to set behind the horizon, you have reached the foot of the Dalai
+        mountains.
+    </string>
+    <string name="story_35">In the morning you see all the splendor and power of the mountain chain in front of you.
+        Mountains stretch for kilometers, going beyond the horizon. There is no workaround, you need to overcome the
+        mountain.
+    </string>
     <string name="story_36">Overcome the Dalai mountain</string>
-    <string name="story_37">The ascent was very hard. The cold wind blew right through to the bones. You tried not to look down, but sometimes you had to, and then the blood run cold. But now you are one of the few mortals who overcame the Dalai mountains.</string>
-    <string name="story_38">You heard about this land from your grandfather, but it seems even he believed this is just a fairy tale. You see the red lands going beyond the horizon.</string>
-    <string name="story_39">The ground around you is red from the heat. Sweat blinds your eyes, the heat makes you hard to breathe. The ground burns the feet even through the shoes. You have no more strength to go, but you remember the king\'s speech and his request…</string>
+    <string name="story_37">The ascent was very hard. The cold wind blew right through to the bones. You tried not to
+        look down, but sometimes you had to, and then the blood run cold. But now you are one of the few mortals who
+        overcame the Dalai mountains.
+    </string>
+    <string name="story_38">You heard about this land from your grandfather, but it seems even he believed this is just
+        a fairy tale. You see the red lands going beyond the horizon.
+    </string>
+    <string name="story_39">The ground around you is red from the heat. Sweat blinds your eyes, the heat makes you hard
+        to breathe. The ground burns the feet even through the shoes. You have no more strength to go, but you remember
+        the king\'s speech and his request…
+    </string>
     <string name="story_40">Overcome the Red hot land</string>
-    <string name="story_41">You\'ve almost reached the end of the red lands. And then you see a strange illusion. A huge ferocious dragon stands right in front of you. His claws dug into the hot ground and his nostrils are distended. It makes a loud roar that fills everything.</string>
-    <string name="story_42">Dragon easily exhales a thin stream of fire that burns your hand. Slowly the consciousness returns to you and you realize that the dragon is real. You realize that you\'re going to die. And at this moment you think that the dragon is fabulously beautiful.</string>
+    <string name="story_41">You\'ve almost reached the end of the red lands. And then you see a strange illusion. A huge
+        ferocious dragon stands right in front of you. His claws dug into the hot ground and his nostrils are distended.
+        It makes a loud roar that fills everything.
+    </string>
+    <string name="story_42">Dragon easily exhales a thin stream of fire that burns your hand. Slowly the consciousness
+        returns to you and you realize that the dragon is real. You realize that you\'re going to die. And at this
+        moment you think that the dragon is fabulously beautiful.
+    </string>
     <string name="story_43">Defeat the dragon</string>
-    <string name="story_44">You stand still and look right into the dragon\'s eyes. Inside them you feel an ancient power. It seems that the dragon is studying you, touches the darkest corners of the soul. Suddenly, the dragon lowers his head in humility and clears your way.</string>
-    <string name="story_45">You see a wonderful land in front of you. The arch of a beautiful rainbow shines in the sky. Fields of fragrant flowers are spreading around. The Golden road leads you to a strange-shaped castle made of material unknown in your area.</string>
-    <string name="story_46">You come to the castle, and an old man in long clothes blocks your way. You can hear that he\'s greeting you, but it looks like he didn\'t open his mouth. The words just sounded in your head.</string>
-    <string name="story_47">Suddenly you feel that you can\'t move and talk. Something very ancient is affecting you. The old man bewitched you!</string>
+    <string name="story_44">You stand still and look right into the dragon\'s eyes. Inside them you feel an ancient
+        power. It seems that the dragon is studying you, touches the darkest corners of the soul. Suddenly, the dragon
+        lowers his head in humility and clears your way.
+    </string>
+    <string name="story_45">You see a wonderful land in front of you. The arch of a beautiful rainbow shines in the sky.
+        Fields of fragrant flowers are spreading around. The Golden road leads you to a strange-shaped castle made of
+        material unknown in your area.
+    </string>
+    <string name="story_46">You come to the castle, and an old man in long clothes blocks your way. You can hear that
+        he\'s greeting you, but it looks like he didn\'t open his mouth. The words just sounded in your head.
+    </string>
+    <string name="story_47">Suddenly you feel that you can\'t move and talk. Something very ancient is affecting you.
+        The old man bewitched you!
+    </string>
     <string name="story_48">Overcome the spell</string>
-    <string name="story_49">It seems your will has become so strong, that helped you overcome ancient spell. You can move and talk again.\n\n You say: </string>
-    <string name="story_50">The old magician says to you:\n " Stranger, don't be angry at me. Different people come here, and many of them have a dark soul. My spell can be overcomen only by those who have strong will and pure thoughts."</string>
-    <string name="story_51">The magician replies to you:\n "I see you're a man of strong will. I have something for you. This is the Sword of a thousand truths. If he falls into the hands of a man with very strong will, then he can crush the whole army."</string>
+    <string name="story_49">It seems your will has become so strong, that helped you overcome ancient spell. You can
+        move and talk again.\n\n You say:
+    </string>
+    <string name="story_50">The old magician says to you:\n " Stranger, don't be angry at me. Different people come
+        here, and many of them have a dark soul. My spell can be overcomen only by those who have strong will and pure
+        thoughts."
+    </string>
+    <string name="story_51">The magician replies to you:\n "I see you're a man of strong will. I have something for you.
+        This is the Sword of a thousand truths. If he falls into the hands of a man with very strong will, then he can
+        crush the whole army."
+    </string>
     <string name="story_52">Take the Sword of a thousand truths</string>
-    <string name="story_53">You\'ve come a long way. It\'s time to go home. You will bring victory to your people. You will bring with you not only a magic sword, but also your steel willpower.</string>
-    <string name="story_54">You see a big old chest on the side of the road. It is inscribed in a language you do not know.</string>
-    <string name="story_55"> You find some strange stone inside. When you look at it, words are heard in your head: "You are only as lazy or lacking in willpower as you think you are."</string>
+    <string name="story_53">You\'ve come a long way. It\'s time to go home. You will bring victory to your people. You
+        will bring with you not only a magic sword, but also your steel willpower.
+    </string>
+    <string name="story_54">You see a big old chest on the side of the road. It is inscribed in a language you do not
+        know.
+    </string>
+    <string name="story_55">You find some strange stone inside. When you look at it, words are heard in your head: "You
+        are only as lazy or lacking in willpower as you think you are."
+    </string>
 
     <string name="option_1">Enter the king\'s palace</string>
     <string name="option_2_1">My Lord, I\'m a simple blacksmith. How can I help you?</string>
     <string name="option_2_2">My Lord, I\'m ready to give my life for the Kingdom</string>
     <string name="option_2_3">Nod reverently and listen</string>
     <string name="option_3_1">My King, for you I\'ll go to the edge of the world</string>
-    <string name="option_3_2">My Lord, I know what the Eastern lands are dangerous. But I\'ll try to get back with the spell</string>
+    <string name="option_3_2">My Lord, I know what the Eastern lands are dangerous. But I\'ll try to get back with the
+        spell
+    </string>
     <string name="option_4">Start the journey</string>
     <string name="option_5_1">Tell that you have urgent order from the King, and go through the gates</string>
     <string name="option_5_2">Talk to the guard</string>
@@ -135,7 +248,9 @@
     <string name="obstacle_9">You need %1$s will power to escape the desert eagle</string>
     <string name="obstacle_10">You need habit chain of length %1$s to overcome the mountain</string>
     <string name="obstacle_11">You need %1$s will power to overcome the red land</string>
-    <string name="obstacle_12">You need at least one commitment with maximum complexity (5) to have chances against the dragon</string>
+    <string name="obstacle_12">You need at least one commitment with maximum complexity (5) to have chances against the
+        dragon
+    </string>
     <string name="obstacle_13">You need %1$s will power to defeat the dragon.\n</string>
     <string name="obstacle_14">You need %1$s will power to unfreeze from the spell</string>
     <string name="obstacle_15">You need %1$s will power to take the Sword</string>
@@ -163,4 +278,30 @@
     <string name="title_21">The wizard</string>
     <string name="title_22">The sword</string>
     <string name="title_23">THE END</string>
+    <string name="today">Today</string>
+    <string name="will_trip">Will Trip</string>
+    <string name="habits">Habits</string>
+    <string name="settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chain_points_settings_hint">Chain points for series of successful actions when counting Willpower
+    </string>
+    <string name="delayed_days">Delayed days</string>
+    <string name="notification_time">Notification time</string>
+    <string name="chain_points">Chain points</string>
+    <string name="special_days">Special days</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_settings_hint">Every day notifications when you have unfinished commitments</string>
+    <string name="_22_00">22:00</string>
+    <string name="delay_settings_hint">Select number of days for which you can delay marking you commitments</string>
+    <string name="special_days_settings_hint">Special day is a day when you can skip your commitment without losing
+        Willpower. E.g. your birthday or trip when you can\'t follow your commitment
+    </string>
+    <string name="week_starts_from">Week starts from</string>
+    <string name="every_few_days_strict">Every few days strict</string>
+    <string name="every_n_days_settings_hint">This setting applies for \"Every few days\" type of commitment only. E.g.
+        you have commitment which should be done every 3 days. If this option is On, you won\'t be able to do commitment
+        between these 3 days. Reccomended - Off
+    </string>
 </resources>

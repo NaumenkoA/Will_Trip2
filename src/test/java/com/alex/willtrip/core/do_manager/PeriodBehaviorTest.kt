@@ -23,6 +23,40 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
     }
 
     @Test
+    fun singleBehaviorTest(){
+        val doSingleDay = Do (name="Test", periodBehavior = DaggerSingleBehaviorComponent.builder().
+            singleBehaviorModule(SingleBehaviorModule(LocalDate.of(2019,6,24))).build().singleBehavior(),
+            note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
+            startDate = LocalDate.of(2019, 6, 24), expireDate = LocalDate.of(2019, 6, 24))
+
+        val isOblBeforeStart = doSingleDay.isObligatoryOnDate(LocalDate.of(2019, 6,23))
+        val isAvailBeforeStart = doSingleDay.isAvailableOnDate(LocalDate.of(2019, 6, 23))
+        val isOblOnStart = doSingleDay.isObligatoryOnDate(LocalDate.of(2019, 6,24))
+        val isAvailOnStart = doSingleDay.isAvailableOnDate(LocalDate.of(2019, 6,24))
+        val isOblAfterEnd = doSingleDay.isObligatoryOnDate(LocalDate.of(2019, 6,25))
+        val isAvailAfterEnd = doSingleDay.isAvailableOnDate(LocalDate.of(2019, 6,25))
+
+        doSingleDay.id = doManager.addNewDo(doSingleDay)
+
+        val result1 = Result(doId = doSingleDay.id, date = LocalDate.of(2019, 6, 24),
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 5, chainPoint = 1)
+
+        resultMutator.addResult(result1)
+
+        val isOblOnResult1Day = doSingleDay.isObligatoryOnDate(LocalDate.of(2019, 6, 24))
+        val isAvailOnResult1Day = doSingleDay.isAvailableOnDate(LocalDate.of(2019, 6, 24))
+
+        assertThat(isAvailBeforeStart).isEqualTo(false)
+        assertThat(isOblBeforeStart).isEqualTo(false)
+        assertThat(isOblOnStart).isEqualTo(true)
+        assertThat(isAvailOnStart).isEqualTo(true)
+        assertThat(isAvailAfterEnd).isEqualTo(false)
+        assertThat(isOblAfterEnd).isEqualTo(false)
+        assertThat(isOblOnResult1Day).isEqualTo(false)
+        assertThat(isAvailOnResult1Day).isEqualTo(false)
+    }
+
+    @Test
     fun everyDayBehaviorTest() {
         val doEveryDay = Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.builder().build().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
@@ -263,6 +297,105 @@ class PeriodBehaviorTest: AbstractObjectBoxTest() {
         assertThat(isOblOnFri).isFalse()
         assertThat(isOblOnSat).isTrue()
         assertThat(isOblOnSun).isTrue()
+    }
+
+    @Test
+    fun nTimesAMonthBehaviorTest() {
+        val nTimesAMonthBeh = Do (name="Test 4", periodBehavior = DaggerNTimesAMonthBehaviorComponent.builder().
+            nTimesAMonthBehaviorModule(NTimesAMonthBehaviorModule(4)).build().nTimesAMonthBehavior(),
+            note = "Test do4", isSpecialDayEnabled = false, isPositive = false, complexity = 5,
+            startDate = LocalDate.of(2019, 4, 1), expireDate = LocalDate.of(2019, 12, 31))
+
+        nTimesAMonthBeh.id = doManager.addNewDo(nTimesAMonthBeh)
+
+        val isOblBeforeStart = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 3,31))
+        val isAvailBeforeStart = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 3, 31))
+        val isOblOnStart = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 4,1))
+        val isAvailOnStart = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 4,1))
+        val isOblOnEnd = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 12,31))
+        val isAvailOnEnd = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 12,31))
+        val isOblAfterEnd = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2020, 1,1))
+        val isAvailAfterEnd = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2020, 1,1))
+
+        val isAvailOnFirst = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,1))
+        val isOblOnFirst = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,1))
+
+        val isAvailOnSecond = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,2))
+        val isOblOnSecond = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,2))
+
+        val result0 = Result(doId = nTimesAMonthBeh.id, date = LocalDate.of(2019, 5, 2),
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 4, chainPoint =0)
+        resultMutator.addResult(result0)
+
+        val isAvailOnTenth = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,10))
+        val isOblOnTenth = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,10))
+
+        val result1 = Result(doId = nTimesAMonthBeh.id, date = LocalDate.of(2019, 5, 10),
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 4, chainPoint =0)
+        resultMutator.addResult(result1)
+
+        val isAvailOnTenthAfterResult = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,10))
+        val isOblOnTenthAfterResult = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,10))
+
+        val isAvailOnFifth = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,15))
+        val isOblOnFifth = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,15))
+
+        val result2 = Result(doId = nTimesAMonthBeh.id, date = LocalDate.of(2019, 5, 15),
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 4, chainPoint =0)
+        resultMutator.addResult(result2)
+
+        val isAvailOnTwen = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,20))
+        val isOblOnTwen = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,20))
+
+        val result3 = Result(doId = nTimesAMonthBeh.id, date = LocalDate.of(2019, 5, 20),
+            resultType = Result.ResultType.DONE, isPositive = false, wpPoint = 4, chainPoint =0)
+        resultMutator.addResult(result3)
+
+        val isAvailOnTwenF = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,25))
+        val isOblOnTwenF = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,25))
+
+        resultMutator.removeResult(result2)
+        resultMutator.removeResult(result3)
+
+        val isAvailOnThirt = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,30))
+        val isOblOnThirt = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,30))
+
+        val isAvailOnThirtF = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 5,31))
+        val isOblOnThirtF = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 5,31))
+
+        val isAvailOnNewMonth = nTimesAMonthBeh.isAvailableOnDate(LocalDate.of(2019, 6,1))
+        val isOblOnNewMonth = nTimesAMonthBeh.isObligatoryOnDate(LocalDate.of(2019, 6,1))
+
+        assertThat(isAvailBeforeStart).isFalse()
+        assertThat(isOblBeforeStart).isFalse()
+        assertThat(isOblOnStart).isFalse()
+        assertThat(isAvailOnStart).isTrue()
+        assertThat(isOblOnEnd).isTrue()
+        assertThat(isAvailOnEnd).isTrue()
+        assertThat(isAvailAfterEnd).isFalse()
+        assertThat(isOblAfterEnd).isFalse()
+        assertThat(isOblOnTenthAfterResult).isFalse()
+        assertThat(isAvailOnTenthAfterResult).isFalse()
+
+        assertThat(isAvailOnFirst).isTrue()
+        assertThat(isAvailOnSecond).isTrue()
+        assertThat(isAvailOnFifth).isTrue()
+        assertThat(isAvailOnTenth).isTrue()
+        assertThat(isAvailOnTwen).isTrue()
+        assertThat(isAvailOnTwenF).isFalse()
+        assertThat(isAvailOnThirt).isTrue()
+        assertThat(isAvailOnThirtF).isTrue()
+        assertThat(isAvailOnNewMonth).isTrue()
+
+        assertThat(isOblOnFirst).isFalse()
+        assertThat(isOblOnSecond).isFalse()
+        assertThat(isOblOnFifth).isFalse()
+        assertThat(isOblOnTenth).isFalse()
+        assertThat(isOblOnTwen).isFalse()
+        assertThat(isOblOnTwenF).isFalse()
+        assertThat(isOblOnThirt).isTrue()
+        assertThat(isOblOnThirtF).isTrue()
+        assertThat(isOblOnNewMonth).isFalse()
     }
 
     @Test

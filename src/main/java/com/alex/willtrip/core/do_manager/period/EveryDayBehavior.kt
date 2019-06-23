@@ -24,4 +24,8 @@ class EveryDayBehavior(private val loader: ResultLoader) : PeriodBehavior() {
     override fun equals(other: Any?): Boolean {
         return (other is EveryDayBehavior)
     }
+
+    override fun hashCode(): Int {
+        return loader.hashCode()
+    }
 }

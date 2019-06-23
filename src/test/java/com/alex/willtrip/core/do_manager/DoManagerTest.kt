@@ -42,10 +42,22 @@ class DoManagerTest:AbstractObjectBoxTest() {
             note = "Test do4", isSpecialDayEnabled = false, isPositive = false, complexity = 5,
             startDate = LocalDate.of(2019, 6, 10), expireDate = LocalDate.of(2021, 12, 31))
 
+        val doObj5 = Do (name="Test 5", periodBehavior = DaggerSingleBehaviorComponent.builder().
+            singleBehaviorModule(SingleBehaviorModule(LocalDate.of(2019,6,10))).build().singleBehavior(),
+            note = "Test do5", isSpecialDayEnabled = false, isPositive = false, complexity = 5,
+            startDate = LocalDate.of(2019, 6, 10), expireDate = LocalDate.of(2021, 6, 10))
+
+        val doObj6 = Do (name="Test 6", periodBehavior =DaggerNTimesAMonthBehaviorComponent.builder().
+            nTimesAMonthBehaviorModule(NTimesAMonthBehaviorModule(4)).build().nTimesAMonthBehavior(),
+            note = "Test do6", isSpecialDayEnabled = false, isPositive = false, complexity = 5,
+            startDate = LocalDate.of(2019, 6, 10), expireDate = LocalDate.of(2021, 10, 10))
+
         doManager.addNewDo(doObj1)
         doManager.addNewDo(doObj2)
         doManager.addNewDo(doObj3)
         doManager.addNewDo(doObj4)
+        doManager.addNewDo(doObj5)
+        doManager.addNewDo(doObj6)
 
         val loaded = doManager.getAllDo()
 
@@ -53,6 +65,8 @@ class DoManagerTest:AbstractObjectBoxTest() {
         assertThat(doObj2).isEqualTo(loaded?.get(1))
         assertThat(doObj3).isEqualTo(loaded?.get(2))
         assertThat(doObj4).isEqualTo(loaded?.get(3))
+        assertThat(doObj5).isEqualTo(loaded?.get(4))
+        assertThat(doObj6).isEqualTo(loaded?.get(5))
     }
 
     @Test(expected = IllegalArgumentException::class)

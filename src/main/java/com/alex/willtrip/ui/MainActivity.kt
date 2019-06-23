@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         val fragment = supportFragmentManager.findFragmentByTag(tag)
         if (fragment != null) {
-            supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
         } else
         {
-            supportFragmentManager.beginTransaction().add(R.id.container, createFragment(tag), tag).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.container, createFragment(tag), tag).commit()
         }
     }
 

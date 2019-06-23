@@ -30,6 +30,34 @@ class SkippedResultsManagerTest: AbstractObjectBoxTest() {
     }
 
     @Test
+    fun checkHasSkippedResultsSingleDay() {
+        val doObj1 = Do (name="Test", periodBehavior = DaggerSingleBehaviorComponent.builder().
+            singleBehaviorModule(SingleBehaviorModule(LocalDate.of(2019,6,24))).build().singleBehavior(),
+            note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
+            startDate = LocalDate.of(2019, 6, 24), expireDate = LocalDate.of(2019, 6, 24))
+
+        val id = doManager.addNewDo(doObj1)
+
+        val t1 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 6, 24))
+        val t = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 6, 25))
+        val f = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 6, 23))
+
+        assertThat(f).isFalse()
+        assertThat(t).isTrue()
+        assertThat(t1).isTrue()
+
+        val result1 = Result(doId = id, date = LocalDate.of(2019, 6, 24), isPositive = true, wpPoint = 4, chainPoint = 0)
+
+        resultManager.addResult(result1)
+
+        val f2 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 6, 24))
+        val f3 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 6, 25))
+
+        assertThat(f2).isFalse()
+        assertThat(f3).isFalse()
+    }
+
+    @Test
     fun checkHasSkippedResultsEveryDay() {
         val doObj1 = Do (name="Test", periodBehavior = DaggerEveryDayBehaviorComponent.create().everyDayBehavior(),
             note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
@@ -133,6 +161,49 @@ class SkippedResultsManagerTest: AbstractObjectBoxTest() {
     }
 
     @Test
+    fun checkHasSkippedResultsNDaysAMonth() {
+        val doObj1 = Do (name="Test", periodBehavior = DaggerNTimesAMonthBehaviorComponent.builder().
+            nTimesAMonthBehaviorModule(NTimesAMonthBehaviorModule(4)).build().nTimesAMonthBehavior(),
+            note = "Test do4", isSpecialDayEnabled = false, isPositive = false, complexity = 5,
+            startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 3, 31))
+
+        val id = doManager.addNewDo(doObj1)
+
+        val f1 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2018, 12, 31))
+        val t2 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 1, 10))
+        val t1 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 1, 28))
+
+
+        assertThat(f1).isFalse()
+        assertThat(t2).isTrue()
+        assertThat(t1).isTrue()
+
+        val result1 = Result(doId = id, date = LocalDate.of(2019, 1, 1), isPositive = true, wpPoint = 4, chainPoint = 0)
+        val result2 = Result(doId = id, date = LocalDate.of(2019, 1, 3), isPositive = false, wpPoint = 4, chainPoint = 0)
+        val result3 = Result(doId = id, date = LocalDate.of(2019, 1, 5), isPositive = false, wpPoint = 4, chainPoint = 0)
+        val result4 = Result(doId = id, date = LocalDate.of(2019, 1, 10), isPositive = false, wpPoint = 4, chainPoint = 0)
+
+        resultManager.addResult(result1)
+        resultManager.addResult(result2)
+        resultManager.addResult(result3)
+
+        val f2 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 1, 5))
+        val t3 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 1, 31))
+
+        resultManager.addResult(result4)
+
+        val f4 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 1, 10))
+        val f5 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 1, 20))
+        val t4 = skippedManager.checkHasSkippedResults(id, LocalDate.of(2019, 2, 1))
+
+        assertThat(f2).isFalse()
+        assertThat(f4).isFalse()
+        assertThat(f5).isFalse()
+        assertThat(t3).isTrue()
+        assertThat(t4).isTrue()
+    }
+
+    @Test
     fun checkHasSkippedResultsEveryNDaysNotStrict() {
         val everyNDays = DaggerEveryNDaysBehaviorComponent.builder().appComponent(DaggerAppComponent.create()).
             everyNDaysBehaviorModule(EveryNDaysBehaviorModule(4)).build().everyNDaysBehavior()
@@ -212,6 +283,24 @@ class SkippedResultsManagerTest: AbstractObjectBoxTest() {
         assertThat(f4).isFalse()
         assertThat(f5).isFalse()
         assertThat(t4).isTrue()
+    }
+
+    @Test
+    fun fillInSkippedResultsSingleDay() {
+        val doObj1 = Do (name="Test", periodBehavior = DaggerSingleBehaviorComponent.builder().
+            singleBehaviorModule(SingleBehaviorModule(LocalDate.of(2019,6,24))).build().singleBehavior(),
+            note = "Test do", isSpecialDayEnabled = true, isPositive = false, complexity = 4,
+            startDate = LocalDate.of(2019,6,24), expireDate = LocalDate.of(2019,6,24))
+
+        val id = doManager.addNewDo(doObj1)
+
+        val skipped = skippedManager.fillInSkippedResults(LocalDate.of(2019, 6, 24))
+        assertThat(skipped).isEqualTo(Skipped(LocalDate.of(2019, 6, 24),
+            LocalDate.of(2019,6,24), 1, 4))
+
+        val f = skippedManager.checkHasSkippedResults(id,LocalDate.of(2019, 6, 25))
+
+        assertThat(f).isFalse()
     }
 
     @Test
@@ -315,6 +404,40 @@ class SkippedResultsManagerTest: AbstractObjectBoxTest() {
             LocalDate.of(2019,1,25), 3, 17))
 
         val f = skippedManager.checkHasSkippedResults(id,LocalDate.of(2019,1,25))
+
+        assertThat(f).isFalse()
+    }
+
+    @Test
+    fun fillInSkippedResultsNTimesAMonth() {
+        val doObj1 = Do (name="Test", periodBehavior = DaggerNTimesAMonthBehaviorComponent.builder().
+            nTimesAMonthBehaviorModule(NTimesAMonthBehaviorModule(10)).build().nTimesAMonthBehavior(),
+            note = "Test do4", isSpecialDayEnabled = false, isPositive = false, complexity = 5,
+            startDate = LocalDate.of(2019, 1, 1), expireDate = LocalDate.of(2019, 1, 31))
+
+        val id = doManager.addNewDo(doObj1)
+
+        val result1 = Result(doId = id, date = LocalDate.of(2019, 1, 3), isPositive = true, wpPoint = 4, chainPoint = 0)
+        val result2 = Result(doId = id, date = LocalDate.of(2019, 1, 5), isPositive = false, wpPoint = 4, chainPoint = 0)
+        val result3 = Result(doId = id, date = LocalDate.of(2019, 1, 6), isPositive = true, wpPoint = 4, chainPoint = 0)
+        val result4 = Result(doId = id, date = LocalDate.of(2019, 1, 8), isPositive = true, wpPoint = 4, chainPoint = 0)
+        val result5 = Result(doId = id, date = LocalDate.of(2019, 1, 10), isPositive = true, wpPoint = 4, chainPoint = 0)
+        val result6 = Result(doId = id, date = LocalDate.of(2019, 1, 13), isPositive = true, wpPoint = 4, chainPoint = 0)
+        val result7 = Result(doId = id, date = LocalDate.of(2019, 1, 16), isPositive = true, wpPoint = 4, chainPoint = 2)
+
+        resultManager.addResult(result1)
+        resultManager.addResult(result2)
+        resultManager.addResult(result3)
+        resultManager.addResult(result4)
+        resultManager.addResult(result5)
+        resultManager.addResult(result6)
+        resultManager.addResult(result7)
+
+        val skipped = skippedManager.fillInSkippedResults(LocalDate.of(2019, 2, 10))
+        assertThat(skipped).isEqualTo(Skipped(LocalDate.of(2019, 1, 29),
+            LocalDate.of(2019,1,31), 3, 17))
+
+        val f = skippedManager.checkHasSkippedResults(id,LocalDate.of(2019,2,10))
 
         assertThat(f).isFalse()
     }

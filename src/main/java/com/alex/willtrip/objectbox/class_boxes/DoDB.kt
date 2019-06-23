@@ -1,6 +1,7 @@
 package com.alex.willtrip.objectbox.class_boxes
 
 import com.alex.willtrip.objectbox.converters.ListOfIntConverter
+import com.alex.willtrip.objectbox.converters.ListOfLongConverter
 import com.alex.willtrip.objectbox.converters.LocalDateConverter
 import io.objectbox.annotation.Convert
 import io.objectbox.annotation.Entity
@@ -21,13 +22,15 @@ class DoDB (@Id var id: Long = 0,
 
     lateinit var periodBehaviorType: String
 
-    @Convert(converter = ListOfIntConverter::class, dbType = String::class)
-     var list: List<Int> = emptyList()
+    @Convert(converter = ListOfLongConverter::class, dbType = String::class)
+     var list: List<Long> = emptyList()
 }
 
 enum class PeriodBehaviourType {
+    SINGLE,
     DAYS_OF_WEEK,
     EVERY_DAY,
     EVERY_N_DAY,
-    N_TIMES_A_WEEK
+    N_TIMES_A_WEEK,
+    N_TIMES_A_MONTH
 }

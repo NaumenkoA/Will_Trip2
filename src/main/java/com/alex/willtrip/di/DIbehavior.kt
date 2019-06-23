@@ -1,16 +1,19 @@
 package com.alex.willtrip.di
 
-import com.alex.willtrip.core.do_manager.period.DaysOfWeekBehavior
-import com.alex.willtrip.core.do_manager.period.EveryDayBehavior
-import com.alex.willtrip.core.do_manager.period.EveryNDaysBehavior
-import com.alex.willtrip.core.do_manager.period.NTimesAWeekBehavior
+import com.alex.willtrip.core.do_manager.period.*
 import com.alex.willtrip.core.result.implementations.ResultLoaderImp
 import com.alex.willtrip.core.result.interfaces.ResultLoader
 import com.alex.willtrip.core.settings.SettingsManager
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import org.threeten.bp.LocalDate
 import javax.inject.Scope
+
+@Component (modules = [ResultLoaderModule::class, SingleBehaviorModule::class])
+interface SingleBehaviorComponent  {
+    fun singleBehavior(): SingleBehavior
+}
 
 @Component (modules = [ResultLoaderModule::class, DaysOfWeekBehaviorModule::class])
     interface DaysOfWeekBehaviorComponent  {
@@ -37,10 +40,23 @@ import javax.inject.Scope
         fun nTimesAWeekBehavior(): NTimesAWeekBehavior
     }
 
+    @Component (modules = [ResultLoaderModule::class, NTimesAMonthBehaviorModule::class])
+    interface NTimesAMonthBehaviorComponent  {
+        fun nTimesAMonthBehavior(): NTimesAMonthBehavior
+    }
+
     @Module
     class ResultLoaderModule {
         @Provides
         fun providesResultLoader(): ResultLoader = ResultLoaderImp()
+    }
+
+    @Module
+    class SingleBehaviorModule (val date: LocalDate) {
+        @Provides
+        fun provideDaysOfWeekBehavior (resultLoader: ResultLoader): SingleBehavior{
+            return SingleBehavior(date, resultLoader)
+        }
     }
 
     @Module
@@ -71,7 +87,17 @@ import javax.inject.Scope
     @Module
     class NTimesAWeekBehaviorModule (val timesAWeek: Int) {
         @Provides
-        fun provideNTimesAWeekBehavior (resultLoader: ResultLoader): NTimesAWeekBehavior {
+        fun provideNTimesAWeekBehavior(resultLoader: ResultLoader): NTimesAWeekBehavior {
             return NTimesAWeekBehavior(timesAWeek, resultLoader)
         }
     }
+
+    @Module
+    class NTimesAMonthBehaviorModule(val timesAMonth: Int) {
+        @Provides
+        fun provideNTimesAMonthBehavior(resultLoader: ResultLoader): NTimesAMonthBehavior {
+            return NTimesAMonthBehavior(timesAMonth, resultLoader)
+        }
+    }
+
+

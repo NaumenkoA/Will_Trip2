@@ -9,6 +9,7 @@ import com.alex.willtrip.objectbox.class_boxes.ObstacleDB
 import com.alex.willtrip.objectbox.class_boxes.ObstacleType
 import com.alex.willtrip.objectbox.class_boxes.ObstacleType.*
 import com.alex.willtrip.objectbox.class_boxes.PeriodBehaviourType
+import org.threeten.bp.LocalDate
 import java.lang.Exception
 import java.lang.IllegalArgumentException
 
@@ -21,9 +22,14 @@ fun Do.toDoDB (): DoDB {
         startDate, expireDate)
 
     when (periodBehavior) {
+        is SingleBehavior -> {
+            doDB.periodBehaviorType = PeriodBehaviourType.SINGLE.name
+            doDB.list = listOf(periodBehavior.date.toEpochDay())
+        }
+
         is DaysOfWeekBehavior -> {
             doDB.periodBehaviorType = PeriodBehaviourType.DAYS_OF_WEEK.name
-            doDB.list = periodBehavior.daysList
+            doDB.list = periodBehavior.daysList.toLongList()
         }
 
         is EveryDayBehavior -> {
@@ -33,12 +39,17 @@ fun Do.toDoDB (): DoDB {
 
         is EveryNDaysBehavior -> {
             doDB.periodBehaviorType = PeriodBehaviourType.EVERY_N_DAY.name
-            doDB.list = listOf(periodBehavior.repeatPeriod)
+            doDB.list = listOf(periodBehavior.repeatPeriod.toLong())
         }
 
         is NTimesAWeekBehavior -> {
             doDB.periodBehaviorType = PeriodBehaviourType.N_TIMES_A_WEEK.name
-            doDB.list = listOf(periodBehavior.timesAWeek)
+            doDB.list = listOf(periodBehavior.timesAWeek.toLong())
+        }
+
+        is NTimesAMonthBehavior -> {
+            doDB.periodBehaviorType = PeriodBehaviourType.N_TIMES_A_MONTH.name
+            doDB.list = listOf(periodBehavior.timesAMonth.toLong())
         }
     }
 
@@ -58,19 +69,30 @@ fun DoDB.toDo(): Do {
     lateinit var periodBehavior:PeriodBehavior
 
     when (periodBehaviorType) {
+
+        PeriodBehaviourType.SINGLE.name -> {
+            periodBehavior = DaggerSingleBehaviorComponent.builder().
+               singleBehaviorModule(SingleBehaviorModule(LocalDate.ofEpochDay(list[0]))).build().singleBehavior()
+        }
+
         PeriodBehaviourType.DAYS_OF_WEEK.name -> {
             periodBehavior = DaggerDaysOfWeekBehaviorComponent.builder().
-                daysOfWeekBehaviorModule(DaysOfWeekBehaviorModule(list)).build().daysOfWeekBehavior()
+                daysOfWeekBehaviorModule(DaysOfWeekBehaviorModule(list.toIntList())).build().daysOfWeekBehavior()
         }
 
         PeriodBehaviourType.N_TIMES_A_WEEK.name -> {
             periodBehavior = DaggerNTimesAWeekBehaviorComponent.builder().
-                nTimesAWeekBehaviorModule(NTimesAWeekBehaviorModule(list[0])).build().nTimesAWeekBehavior()
+                nTimesAWeekBehaviorModule(NTimesAWeekBehaviorModule(list[0].toInt())).build().nTimesAWeekBehavior()
+        }
+
+        PeriodBehaviourType.N_TIMES_A_MONTH.name -> {
+            periodBehavior = DaggerNTimesAMonthBehaviorComponent.builder().
+               nTimesAMonthBehaviorModule(NTimesAMonthBehaviorModule(list[0].toInt())).build().nTimesAMonthBehavior()
         }
 
         PeriodBehaviourType.EVERY_N_DAY.name -> {
             periodBehavior = DaggerEveryNDaysBehaviorComponent.builder().appComponent(DaggerAppComponent.create()).
-                everyNDaysBehaviorModule(EveryNDaysBehaviorModule(list[0])).build().everyNDaysBehavior()
+                everyNDaysBehaviorModule(EveryNDaysBehaviorModule(list[0].toInt())).build().everyNDaysBehavior()
         }
 
         PeriodBehaviourType.EVERY_DAY.name -> {
@@ -139,4 +161,24 @@ fun List<Obstacle>.convertToObstacleDBList(): List <ObstacleDB> {
         list.add (it.toObstacleDB())
     }
     return list
+}
+
+fun List<Int>.toLongList(): List<Long> {
+   val longList = mutableListOf<Long>()
+
+    this.forEach {
+        longList.add(it.toLong())
+    }
+
+    return longList
+}
+
+fun List<Long>.toIntList(): List<Int> {
+    val intList = mutableListOf<Int>()
+
+    this.forEach {
+        intList.add(it.toInt())
+    }
+
+    return intList
 }

@@ -285,7 +285,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="chain_points_settings_hint">Chain points for series of successful actions when counting Willpower
+    <string name="chain_points_settings_hint">Enable chain points for series of successful actions when counting Willpower
     </string>
     <string name="delayed_days">Delayed days</string>
     <string name="notification_time">Notification time</string>
@@ -302,6 +302,21 @@
     <string name="every_few_days_strict">Every few days strict</string>
     <string name="every_n_days_settings_hint">This setting applies for \"Every few days\" type of commitment only. E.g.
         you have commitment which should be done every 3 days. If this option is On, you won\'t be able to do commitment
-        between these 3 days. Reccomended - Off
+        between these 3 days. Recommended - Off
     </string>
+
+    <string-array name="array_week_starts_from">
+    <item>Mon</item>
+    <item>Sun</item>
+    </string-array>
+
+    <string-array name="array_delay_days">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
 </resources>

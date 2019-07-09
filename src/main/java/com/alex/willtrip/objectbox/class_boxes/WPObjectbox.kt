@@ -12,9 +12,8 @@ import io.objectbox.reactive.DataSubscription
 class WPObjectbox : WPLoader, WPSubscriber {
 
     private val query by lazy {
-        getBox().query().equal(WillPower_.id, 0).build()
+        getBox().query().equal(WillPower_.id, 1).build()
     }
-
 
     private fun getBox (): Box <WillPower> {
         return ObjectBox.boxStore.boxFor(WillPower::class.java)
@@ -22,17 +21,18 @@ class WPObjectbox : WPLoader, WPSubscriber {
 
     override fun loadWillPower(): WillPower? {
         if (getBox().isEmpty) return null
-        return getBox().all[0]
+        val wp = getBox().get(1)
+        return getBox().get(1)
     }
 
     private fun loadWillPowerAsInt(): Int {
         return if (getBox().all.isEmpty()) {
             0
-        } else getBox().all[0].willPower
+        } else getBox().get(1).willPower
     }
 
     override fun saveWillPower(willPower: WillPower) {
-        if (getBox().all.isNotEmpty()) willPower.id = getBox().all[0].id
+        if (getBox().all.isNotEmpty()) willPower.id = 1
         getBox().put(willPower)
     }
 

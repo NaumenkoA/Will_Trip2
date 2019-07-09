@@ -9,6 +9,10 @@ import io.objectbox.reactive.DataSubscription
 class WPManager (private val mutator: WPMutator, private val loader: WPLoader, private val subscriber: WPSubscriber) {
 
     init {
+        refreshMutator()
+    }
+
+    private fun refreshMutator() {
         val willPower = loadWP() ?: WillPower()
         mutator.setWP(willPower)
     }
@@ -20,6 +24,7 @@ class WPManager (private val mutator: WPMutator, private val loader: WPLoader, p
     }
 
     fun increaseWP (value: Int): Int {
+        refreshMutator()
         val newWP = mutator.increase(value)
         saveWP(newWP)
         return newWP
@@ -32,6 +37,7 @@ class WPManager (private val mutator: WPMutator, private val loader: WPLoader, p
     }
 
     fun decreaseWP (value: Int): Int {
+        refreshMutator()
         val newWP = mutator.decrease(value)
         saveWP(newWP)
         return newWP

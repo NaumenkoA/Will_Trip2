@@ -354,9 +354,49 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "22:3547311426241340858",
+      "lastPropertyId": "4:6723068659059671811",
+      "name": "Gratitude",
+      "properties": [
+        {
+          "id": "1:2327934455497437032",
+          "name": "id"
+        },
+        {
+          "id": "2:1104018971121122186",
+          "name": "date"
+        },
+        {
+          "id": "3:4436087968213164988",
+          "name": "text"
+        },
+        {
+          "id": "4:6723068659059671811",
+          "name": "photoUri"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "23:2136298761700477922",
+      "lastPropertyId": "2:831372008420567803",
+      "name": "GratitudeWPBonus",
+      "properties": [
+        {
+          "id": "1:2414798349284863922",
+          "name": "id"
+        },
+        {
+          "id": "2:831372008420567803",
+          "name": "date"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "21:3902672552625410634",
+  "lastEntityId": "23:2136298761700477922",
   "lastIndexId": "15:6885857888018358862",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

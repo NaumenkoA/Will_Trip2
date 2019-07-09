@@ -7,10 +7,10 @@ import com.alex.willtrip.core.do_manager.implementations.DoSubscriberImp
 import com.alex.willtrip.core.do_manager.interfaces.DoLoader
 import com.alex.willtrip.core.do_manager.interfaces.DoMutator
 import com.alex.willtrip.core.do_manager.interfaces.DoSubscriber
-import com.alex.willtrip.core.do_manager.period.DaysOfWeekBehavior
-import com.alex.willtrip.core.do_manager.period.EveryDayBehavior
-import com.alex.willtrip.core.do_manager.period.EveryNDaysBehavior
-import com.alex.willtrip.core.do_manager.period.NTimesAWeekBehavior
+import com.alex.willtrip.core.gratitude.GratitudeManager
+import com.alex.willtrip.core.gratitude.implementations.GratitudeDB
+import com.alex.willtrip.core.gratitude.implementations.GratitudeWPBonusDB
+import com.alex.willtrip.core.gratitude.interfaces.*
 import com.alex.willtrip.core.result.ResultManager
 import com.alex.willtrip.core.result.implementations.*
 import com.alex.willtrip.core.result.interfaces.*
@@ -39,7 +39,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [DoManagerModule::class, ResultManagerModule::class, SettingsModule::class,
-    WPModule::class, SkippedResultManagerModule::class, StoryModule::class])
+    WPModule::class, SkippedResultManagerModule::class, StoryModule::class, StoryModule.GratitudeModule::class])
+
 interface AppComponent {
     fun doManager(): DoManager
     fun resultManager(): ResultManager
@@ -47,6 +48,7 @@ interface AppComponent {
     fun wpManager(): WPManager
     fun skippedResultsManager(): SkippedResultsManager
     fun storyManager(): StoryManager
+    fun gratitudeManager(): GratitudeManager
 }
 
 @Module
@@ -229,5 +231,47 @@ class StoryModule {
     @Provides
     fun storyLoader(): StoryLoader {
         return StoryLoaderImp()
+    }
+
+    @Module
+    class GratitudeModule {
+
+        @Singleton
+        @Provides
+        fun providesGratitudeManager (wpManager: WPManager, gratitudeLoader: GratitudeLoader, gratitudeMutator: GratitudeMutator,
+                                      gratitudeSubscriber: GratitudeSubscriber, gratitudeWPBonusMutator: GratitudeWPBonusMutator,
+                                      gratitudeWPBonusSubscriber: GratitudeWPBonusSubscriber): GratitudeManager{
+            return GratitudeManager(wpManager, gratitudeLoader, gratitudeMutator, gratitudeSubscriber, gratitudeWPBonusMutator, gratitudeWPBonusSubscriber)
+        }
+
+        @Singleton
+        @Provides
+        fun providesGratitudeLoader(): GratitudeLoader {
+            return GratitudeDB()
+        }
+
+        @Singleton
+        @Provides
+        fun providesGratitudeMutator(): GratitudeMutator {
+            return GratitudeDB()
+        }
+
+        @Singleton
+        @Provides
+        fun providesGratitudeSubscriber(): GratitudeSubscriber {
+            return GratitudeDB()
+        }
+
+        @Singleton
+        @Provides
+        fun providesGratitudeWPBonusMutator(): GratitudeWPBonusMutator {
+            return GratitudeWPBonusDB()
+        }
+
+        @Singleton
+        @Provides
+        fun providesGratitudeWPBonusSubscriber(): GratitudeWPBonusSubscriber {
+            return GratitudeWPBonusDB()
+        }
     }
 }

@@ -24,8 +24,8 @@ class SettingsManager (private val accessor: SettingAccessor, private val subscr
         accessor.editSetting(setting.name, newValue)
     }
 
-    fun addSettingObserver (setting: Setting, observer: DataObserver<Pair<String, Int>>): DataSubscription {
-        return subscriber.addObserver(setting.name, observer)
+    fun addSettingObserver (setting: Setting, observer: DataObserver<Pair<Setting, Int>>): DataSubscription {
+        return subscriber.addObserver(setting, observer)
     }
 
     fun removeObserver(dataSubscription: DataSubscription) {

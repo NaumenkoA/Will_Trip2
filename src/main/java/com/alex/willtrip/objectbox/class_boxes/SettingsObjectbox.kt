@@ -29,14 +29,13 @@ class SettingsObjectbox: SettingsDB, SettingSubscriber {
         return query.findUnique()?.value ?: setting.default
     }
 
-    override fun addObserver(settingName: String, observer: DataObserver<Pair<String, Int>>): DataSubscription {
-        val query = getBox().query().equal(SettingEntity_.name, settingName).build()
+    override fun addObserver(setting: Setting, observer: DataObserver<Pair<Setting, Int>>): DataSubscription {
+        val query = getBox().query().equal(SettingEntity_.name, setting.name).build()
         return query.subscribe().
             transform {
                 val settingEntity = query.findUnique()
-                val setting = Setting.valueOf(settingName)
                 val settingValue = settingEntity?.value ?: setting.default
-                Pair (setting.name, settingValue)}.observer(observer)
+                Pair (setting, settingValue)}.observer(observer)
     }
 
     override fun removeObserver(dataSubscription: DataSubscription) {

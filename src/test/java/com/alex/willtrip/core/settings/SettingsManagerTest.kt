@@ -83,13 +83,13 @@ class SettingsManagerTest: AbstractObjectBoxTest() {
         assertThat (observer.settingValue).isEqualTo(10000)
     }
 
-    class SettingChangeObserver: DataObserver<Pair<String, Int>> {
+    class SettingChangeObserver: DataObserver<Pair<Setting, Int>> {
 
         var settingName = ""
         var settingValue: Int = 0
 
-        override fun onData(data: Pair<String, Int>) {
-            settingName = data.first
+        override fun onData(data: Pair<Setting, Int>) {
+            settingName = data.first.name
             settingValue = data.second
         }
     }

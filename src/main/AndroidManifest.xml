@@ -3,6 +3,7 @@
           package="com.alex.willtrip">
 
     <application
+            android:name="com.alex.willtrip.objectbox.App"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -19,3 +20,4 @@
     </application>
 
 </manifest>
+

@@ -35,8 +35,6 @@ class SettingsFragment : Fragment(), Observer<Pair<Setting, Int>> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getData().observe(this, this)
-
         populateSpinner (weekStartsFromSpinner, R.array.array_week_starts_from)
         populateSpinner (delayDaysSpinner, R.array.array_delay_days)
 
@@ -59,7 +57,10 @@ class SettingsFragment : Fragment(), Observer<Pair<Setting, Int>> {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProviders.of(activity!!).get(SettingViewModel::class.java)
+        viewModel.getData().observe(this, this)
+
     }
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -72,7 +73,7 @@ class SettingsFragment : Fragment(), Observer<Pair<Setting, Int>> {
     @SuppressLint("SetTextI18n")
     private fun showTimePickerDialog(hour: Int, minute: Int) {
         val listener = TimePickerDialog.OnTimeSetListener {
-                view, selectedHour, selectedMin ->
+                _, selectedHour, selectedMin ->
                 val hourAsString = addZeroIfOneNumber(selectedHour)
                 val minuteAsString = addZeroIfOneNumber(selectedMin)
                 timeEditText.setText("$hourAsString:$minuteAsString")

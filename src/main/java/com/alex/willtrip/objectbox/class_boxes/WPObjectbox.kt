@@ -21,7 +21,6 @@ class WPObjectbox : WPLoader, WPSubscriber {
 
     override fun loadWillPower(): WillPower? {
         if (getBox().isEmpty) return null
-        val wp = getBox().get(1)
         return getBox().get(1)
     }
 

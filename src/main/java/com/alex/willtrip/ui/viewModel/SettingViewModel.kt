@@ -12,7 +12,7 @@ class SettingViewModel: ViewModel(), DataObserver<Pair<Setting, Int>> {
 
     private val settingManager = DaggerAppComponent.create().settingsManager()
 
-    private lateinit var settingData: MutableLiveData <Pair<Setting,Int>>
+    private val settingData = MutableLiveData <Pair<Setting,Int>>()
 
     private val subscriptionList: DataSubscriptionList = DataSubscriptionList()
 

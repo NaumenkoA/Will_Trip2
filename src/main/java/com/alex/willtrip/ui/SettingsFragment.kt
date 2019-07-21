@@ -142,7 +142,7 @@ class SettingsFragment : Fragment() {
 
     private fun convertSecondsToTime(seconds: Int): String {
         val hour = seconds/(60*60)
-        val minute = seconds % (60*60)
+        val minute = (seconds % (60*60))/60
         val hourAsString = addZeroIfOneNumber(hour)
         val minuteAsString = addZeroIfOneNumber(minute)
         return "$hourAsString:$minuteAsString"

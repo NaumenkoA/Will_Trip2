@@ -15,6 +15,7 @@ class SettingsManagerTest: AbstractObjectBoxTest() {
 
     lateinit var settingsManager: SettingsManager
 
+
     @Before
     fun setUp() {
         settingsManager = DaggerAppComponent.builder().build().settingsManager()

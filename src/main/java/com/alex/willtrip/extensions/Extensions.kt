@@ -182,3 +182,7 @@ fun List<Long>.toIntList(): List<Int> {
 
     return intList
 }
+
+fun Int.toBoolean(): Boolean {
+    return this == 1
+}

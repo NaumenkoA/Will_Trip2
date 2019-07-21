@@ -16,8 +16,6 @@ class SettingViewModel: ViewModel(), DataObserver<Pair<Setting, Int>> {
 
     private val subscriptionList: DataSubscriptionList = DataSubscriptionList()
 
-    fun resetToDefault()= thread { settingManager.resetAllToDefault()}
-
     fun getData (): MutableLiveData <Pair<Setting,Int>> {
 
         cancelSubscription()
@@ -35,21 +33,14 @@ class SettingViewModel: ViewModel(), DataObserver<Pair<Setting, Int>> {
     }
 
     override fun onData(data: Pair<Setting, Int>) {
-        settingData.postValue(data)
-    }
-
-    fun getCurrentSettingValues(): List<Pair<Setting,Int>> {
-        val list = mutableListOf<Pair<Setting,Int>>()
-        Setting.values().forEach {
-            val value = settingManager.getSettingValue(it)
-            list.add(Pair(it, value))
-        }
-        return list
+        settingData.value = data
     }
 
     fun onSettingChanged(setting: Setting, value: Int) {
         thread {settingManager.setSettingValue(setting, value) }
     }
+
+    fun resetToDefault()= thread { settingManager.resetAllToDefault()}
 
     override fun onCleared() {
         super.onCleared()

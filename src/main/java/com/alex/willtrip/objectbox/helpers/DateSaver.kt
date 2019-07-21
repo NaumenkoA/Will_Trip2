@@ -11,21 +11,21 @@ import org.threeten.bp.LocalDate
 
 @Entity
 class DateEntity (@Id var id: Long = 0, @Index val link: Long,
-                 @Convert(converter = LocalDateConverter::class, dbType = Long::class)
-                 val date: LocalDate)
+                  @Convert(converter = LocalDateConverter::class, dbType = Long::class)
+                  val date: LocalDate)
 
 class DateSaver {
 
-    private fun getBox (): Box<DateEntity> {
-        return ObjectBox.boxStore.boxFor(DateEntity::class.java)
-    }
+  private fun getBox (): Box<DateEntity> {
+    return ObjectBox.boxStore.boxFor(DateEntity::class.java)
+  }
 
-    fun getDate (link: Long): LocalDate? {
-        return getBox().query().equal(DateEntity_.link, link).build().findUnique()?.date
-    }
+  fun getDate (link: Long): LocalDate? {
+    return getBox().query().equal(DateEntity_.link, link).build().findUnique()?.date
+  }
 
-    fun saveDate (link: Long, date: LocalDate) {
-        val id = getBox().query().equal(DateEntity_.link, link).build().findUnique()?.id ?: 0
-        getBox().put(DateEntity(id, link, date))
-    }
+  fun saveDate (link: Long, date: LocalDate) {
+    val id = getBox().query().equal(DateEntity_.link, link).build().findUnique()?.id ?: 0
+    getBox().put(DateEntity(id, link, date))
+  }
 }

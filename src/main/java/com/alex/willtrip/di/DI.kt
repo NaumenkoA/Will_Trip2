@@ -32,6 +32,8 @@ import com.alex.willtrip.core.willpower.interfaces.WPMutator
 import com.alex.willtrip.objectbox.class_boxes.SettingsObjectbox
 import com.alex.willtrip.objectbox.class_boxes.WPObjectbox
 import com.alex.willtrip.objectbox.helpers.DateSaver
+import com.alex.willtrip.ui.presenter.SettingPresenter
+import com.alex.willtrip.ui.presenter.SettingPresenterImp
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -39,7 +41,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [DoManagerModule::class, ResultManagerModule::class, SettingsModule::class,
-    WPModule::class, SkippedResultManagerModule::class, StoryModule::class, StoryModule.GratitudeModule::class])
+    WPModule::class, SkippedResultManagerModule::class, StoryModule::class, StoryModule.GratitudeModule::class,
+StoryModule.SettingPresenterModule::class])
 
 interface AppComponent {
     fun doManager(): DoManager
@@ -49,6 +52,7 @@ interface AppComponent {
     fun skippedResultsManager(): SkippedResultsManager
     fun storyManager(): StoryManager
     fun gratitudeManager(): GratitudeManager
+    fun settingPresenter():SettingPresenter
 }
 
 @Module
@@ -272,6 +276,15 @@ class StoryModule {
         @Provides
         fun providesGratitudeWPBonusSubscriber(): GratitudeWPBonusSubscriber {
             return GratitudeWPBonusDB()
+        }
+    }
+
+    @Module
+    class SettingPresenterModule {
+        @Singleton
+        @Provides
+        fun providesSettingPresenter (settingManager: SettingsManager):SettingPresenter {
+            return SettingPresenterImp(settingManager)
         }
     }
 }

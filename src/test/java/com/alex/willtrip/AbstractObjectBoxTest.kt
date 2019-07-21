@@ -1,5 +1,6 @@
 package com.alex.willtrip
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.alex.willtrip.core.MyObjectBox
 import com.alex.willtrip.objectbox.ObjectBox
 import org.junit.After
@@ -9,6 +10,8 @@ import java.io.File
 import java.io.IOException
 
 import io.objectbox.BoxStore
+import org.junit.Rule
+import org.junit.rules.TestRule
 
 abstract class AbstractObjectBoxTest {
     private var boxStoreDir: File? = null

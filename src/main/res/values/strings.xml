@@ -304,6 +304,9 @@
         you have commitment which should be done every 3 days. If this option is On, you won\'t be able to do commitment
         between these 3 days. Recommended - Off
     </string>
+    <string name="default_title">Are you sure?</string>
+    <string name="to_default_question">Reset all settings to default</string>
+    <string name="settings_to_default_done">All settings are reset to default</string>
 
     <string-array name="array_week_starts_from">
     <item>Mon</item>

@@ -285,7 +285,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="chain_points_settings_hint">Enable chain points for series of successful actions when counting Willpower
+    <string name="chain_points_settings_hint">Enable chain points for series of successful actions when counting
+        Willpower
     </string>
     <string name="delayed_days">Delayed days</string>
     <string name="notification_time">Notification time</string>
@@ -309,8 +310,8 @@
     <string name="settings_to_default_done">All settings are reset to default</string>
 
     <string-array name="array_week_starts_from">
-    <item>Mon</item>
-    <item>Sun</item>
+        <item>Mon</item>
+        <item>Sun</item>
     </string-array>
 
     <string-array name="array_delay_days">

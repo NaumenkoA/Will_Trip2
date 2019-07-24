@@ -27,11 +27,19 @@ class StoryLoaderImp: StoryLoader {
     }
 
     override fun loadStory(story: Story) {
+        clean()
         getThemeBox().put(story.themeList)
         getSceneStubBox().put(story.sceneList)
         getOptionBox().put(story.optionList)
         val obstacleDBList = story.obstacleList.convertToObstacleDBList()
         getObstacleBox().put(obstacleDBList)
+    }
+
+    private fun clean() {
+        getThemeBox().removeAll()
+        getSceneStubBox().removeAll()
+        getOptionBox().removeAll()
+        getObstacleBox().removeAll()
     }
 }
 

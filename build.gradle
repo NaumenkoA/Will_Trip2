@@ -54,4 +54,5 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.2.0'
 
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    implementation 'com.android.support:palette-v7:27.1.1'
 }

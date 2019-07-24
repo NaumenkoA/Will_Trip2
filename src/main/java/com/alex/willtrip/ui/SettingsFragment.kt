@@ -28,7 +28,7 @@ class SettingsFragment : Fragment() {
 
     lateinit var settingPresenter: SettingPresenter
 
-    var delayDaysInteracitons = 0
+    var delayDaysInteractions = 0
 
     var weekStartsFromInteractions = 0
 
@@ -42,7 +42,6 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         populateSpinner(weekStartsFromSpinner, R.array.array_week_starts_from)
         populateSpinner(delayDaysSpinner, R.array.array_delay_days)
 
@@ -95,7 +94,7 @@ class SettingsFragment : Fragment() {
         }
 
         weekStartsFromSpinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                  if (++weekStartsFromInteractions > 1)
                      settingPresenter.onSettingChanged(Setting.WEEK_STARTS_MON, (position == 0).toInt())
             }
@@ -106,8 +105,8 @@ class SettingsFragment : Fragment() {
         }
 
         delayDaysSpinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                if (++delayDaysInteracitons > 1)
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                if (++delayDaysInteractions > 1)
                 settingPresenter.onSettingChanged(Setting.DELAYED_DAYS, position)
             }
 

@@ -1,0 +1,130 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rootLayout"
+                android:background="@color/colorGrey"
+                tools:context="com.alex.willtrip.ui.StoryFragment">
+
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    <ImageView
+            android:id="@+id/scenePicture"
+            android:scaleType="fitCenter"
+            android:layout_below="@id/titleTextView"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="ContentDescription"/>
+
+    <ImageView
+            android:id="@+id/hidingImageView"
+            android:background="@color/colorTransparentBlue"
+            android:visibility="visible"
+            android:alpha="0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="ContentDescription">
+    </ImageView>
+
+    <TextView
+            android:id="@+id/titleTextView"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            tools:text="Title"
+            android:textColor="@color/colorTransparentWhite"
+            android:background="@drawable/flag"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <ScrollView
+            android:id="@+id/scrollView"
+            android:fillViewport="true"
+            android:layout_below="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:id="@+id/contentLayout"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/stageTextView"
+                    android:paddingTop="32dp"
+                    android:paddingBottom="12dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textSize="20sp"
+                    android:gravity="fill_horizontal"
+                    tools:text="Text"
+                    android:lineSpacingMultiplier="1.3"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <View
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+            <TextView
+                    android:id="@+id/obstacleTextView"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    tools:text="Obstacle"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <Button
+                    android:id="@+id/optionButton3"
+                    android:background="@drawable/button_background"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@drawable/button_text_color"
+                    android:minHeight="60dp"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"/>
+
+            <Button
+                    android:id="@+id/optionButton2"
+                    android:background="@drawable/button_background"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@drawable/button_text_color"
+                    android:minHeight="60dp"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"/>
+
+            <Button
+                    android:id="@+id/optionButton1"
+                    android:background="@drawable/button_background"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@drawable/button_text_color"
+                    android:minHeight="60dp"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

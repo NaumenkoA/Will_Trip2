@@ -1,5 +1,6 @@
 package com.alex.willtrip.ui
 
+import android.content.pm.ActivityInfo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,11 +20,20 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.action_habits -> showToast ("Habit")
                 R.id.action_today -> showToast ("Today")
-                R.id.action_trip_mode -> showToast ("Will Trip")
+                R.id.action_trip_mode -> showFragment (FRAGMENT_STORY)
                 R.id.action_settings -> showFragment (FRAGMENT_SETTINGS)
             }
             true
         };
+    }
+
+    private fun portraitModeOnly(portraitMode: Boolean) {
+        if (portraitMode) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        } else {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+        }
+
     }
 
     private fun showFragment(tag: String) {
@@ -40,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     private fun createFragment(tag: String): Fragment {
         return when (tag) {
             FRAGMENT_SETTINGS -> SettingsFragment()
+            FRAGMENT_STORY -> StoryFragment()
             else -> throw IllegalArgumentException ("${this::class.java.simpleName}: can't create Fragment with tag: $tag. $tag is not found")
         }
     }
@@ -52,5 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val FRAGMENT_SETTINGS = "fragment_settings"
+        const val FRAGMENT_STORY = "fragment_story"
     }
 }

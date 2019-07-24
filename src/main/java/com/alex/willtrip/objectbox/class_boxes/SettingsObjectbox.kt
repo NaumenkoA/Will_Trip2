@@ -1,12 +1,10 @@
 package com.alex.willtrip.objectbox.class_boxes
 
-import android.support.annotation.MainThread
 import com.alex.willtrip.objectbox.ObjectBox
 import com.alex.willtrip.core.settings.Setting
 import com.alex.willtrip.core.settings.interfaces.SettingSubscriber
 import com.alex.willtrip.core.settings.interfaces.SettingsDB
 import io.objectbox.Box
-import io.objectbox.android.AndroidScheduler
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.annotation.Index

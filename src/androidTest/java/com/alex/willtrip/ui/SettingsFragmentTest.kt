@@ -18,8 +18,8 @@ import com.alex.willtrip.R
 import org.hamcrest.Matchers.containsString
 import org.hamcrest.Matchers.not
 import android.widget.TimePicker
+import com.alex.willtrip.ui.actions.PickerActions
 import org.hamcrest.Matchers
-
 
 class SettingsFragmentTest {
 

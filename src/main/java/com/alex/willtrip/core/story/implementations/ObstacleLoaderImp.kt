@@ -14,6 +14,7 @@ import com.alex.willtrip.objectbox.class_boxes.ObstacleDB_
 import io.objectbox.Box
 import org.threeten.bp.LocalDate
 import java.lang.IllegalArgumentException
+import kotlin.math.max
 
 class ObstacleLoaderImp (val wpManager: WPManager, val doManager: DoManager, val resultManager: ResultManager): ObstacleLoader {
 
@@ -38,15 +39,18 @@ class ObstacleLoaderImp (val wpManager: WPManager, val doManager: DoManager, val
 
         val obstacleWithTotalValue = getObstacleWithTotalValue(initializedObstacle, currentDate)
 
-        return getInitializedObstacle(obstacleWithTotalValue)
+        saveObstacle(obstacleWithTotalValue)
+
+       return getInitializedObstacle(obstacleWithTotalValue)
     }
 
     private fun getObstacleWithTotalValue(obstacle: Obstacle, currentDate: LocalDate): Obstacle {
         when (obstacle) {
             is ObstacleWP -> {
                 return if (obstacle.totalValue == 0) {
-                    val totalValue = Math.max(obstacle.minValue, wpManager.getCurrentWP() + obstacle.addValue)
-                    ObstacleWP(obstacle.link, obstacle.textId, obstacle.addValue, obstacle.minValue, totalValue)
+                    val totalValue = max(obstacle.minValue, wpManager.getCurrentWP() + obstacle.addValue)
+                    val trimmedTotalValue = trim (totalValue)
+                    ObstacleWP(obstacle.link, obstacle.textId, obstacle.addValue, obstacle.minValue, trimmedTotalValue)
                 } else obstacle
             }
 
@@ -64,6 +68,23 @@ class ObstacleLoaderImp (val wpManager: WPManager, val doManager: DoManager, val
                 } else obstacle
             }
             else -> return obstacle
+        }
+    }
+
+    private fun trim(totalValue: Int): Int {
+        return when (totalValue) {
+            in (0..10) ->  totalValue
+            in (11..100) -> {
+                val trimmed = if (totalValue%5 != 0) (totalValue/5)*5 + 5
+                else totalValue
+                trimmed
+            }
+            in (101..Int.MAX_VALUE) -> {
+                val trimmed = if (totalValue%10 != 0) (totalValue/10)*10 + 10
+                else totalValue
+                trimmed
+            }
+            else -> totalValue
         }
     }
 

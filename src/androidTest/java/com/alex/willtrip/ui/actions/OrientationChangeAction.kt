@@ -1,23 +1,23 @@
-package com.alex.willtrip.ui
+package com.alex.willtrip.ui.actions
 
 import android.view.View
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import org.hamcrest.Matcher
 import android.content.pm.ActivityInfo
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.view.ViewGroup
-import androidx.test.runner.lifecycle.Stage
 
 class OrientationChangeAction(private val orientation: Int): ViewAction {
 
     companion object {
-        fun orientationLandscape(): ViewAction = OrientationChangeAction(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
-        fun orientationPortrait(): ViewAction = OrientationChangeAction(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        fun orientationLandscape(): ViewAction =
+            OrientationChangeAction(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+        fun orientationPortrait(): ViewAction =
+            OrientationChangeAction(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 
     override fun getDescription(): String = "change orientation to $orientation"

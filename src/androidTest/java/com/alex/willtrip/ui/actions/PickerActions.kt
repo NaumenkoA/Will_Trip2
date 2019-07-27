@@ -1,4 +1,4 @@
-package com.alex.willtrip.ui
+package com.alex.willtrip.ui.actions
 
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed

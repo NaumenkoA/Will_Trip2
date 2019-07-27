@@ -59,7 +59,7 @@
     <string name="story_19">You leave the Arden forest, and on one of the trees in the distance you see a carved
         inscription. You wonder what is written there, but the wolf could still be somewhere nearby.
     </string>
-    <string name="story_20">On the tree the inscription is engraved:\n \"It is a rough road that leads to the heights of
+    <string name="story_20">On the tree the inscription is engraved:\n\n \"It is a rough road that leads to the heights of
         greatness\".
     </string>
     <string name="story_21">You see a calm river in front of you. Looking around, you can\'t see the crossing on foot.
@@ -149,13 +149,13 @@
     <string name="story_49">It seems your will has become so strong, that helped you overcome ancient spell. You can
         move and talk again.\n\n You say:
     </string>
-    <string name="story_50">The old magician says to you:\n " Stranger, don't be angry at me. Different people come
-        here, and many of them have a dark soul. My spell can be overcomen only by those who have strong will and pure
-        thoughts."
+    <string name="story_50">The old magician says to you:\n\n \"Stranger, don\'t be angry at me. Different people come
+        here, and many of them have a dark soul. My spell can be overcame only by those who have strong will and pure
+        thoughts.\"
     </string>
-    <string name="story_51">The magician replies to you:\n "I see you're a man of strong will. I have something for you.
+    <string name="story_51">The magician replies to you:\n\n \"I see you\'re a man of strong will. I have something for you.
         This is the Sword of a thousand truths. If he falls into the hands of a man with very strong will, then he can
-        crush the whole army."
+        crush the whole army.\"
     </string>
     <string name="story_52">Take the Sword of a thousand truths</string>
     <string name="story_53">You\'ve come a long way. It\'s time to go home. You will bring victory to your people. You
@@ -164,8 +164,8 @@
     <string name="story_54">You see a big old chest on the side of the road. It is inscribed in a language you do not
         know.
     </string>
-    <string name="story_55">You find some strange stone inside. When you look at it, words are heard in your head: "You
-        are only as lazy or lacking in willpower as you think you are."
+    <string name="story_55">You find some strange stone inside. When you look at it, words are heard in your head: \n\n \"You
+        are only as lazy or lacking in willpower as you think you are.\"
     </string>
 
     <string name="option_1">Enter the king\'s palace</string>
@@ -308,6 +308,7 @@
     <string name="default_title">Are you sure?</string>
     <string name="to_default_question">Reset all settings to default</string>
     <string name="settings_to_default_done">All settings are reset to default</string>
+    <string name="willpower_increased_message">Your WillPower was increased by %1$s points</string>
 
     <string-array name="array_week_starts_from">
         <item>Mon</item>

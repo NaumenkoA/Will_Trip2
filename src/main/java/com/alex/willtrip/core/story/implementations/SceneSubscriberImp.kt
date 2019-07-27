@@ -20,7 +20,7 @@ class SceneSubscriberImp(): SceneSubscriber {
     }
 
     override fun addObserver(observer: DataObserver<Int>): DataSubscription {
-        val query = getIntBox().query().equal(IntSaver_.link, 1).build()
+        val query = getIntBox().query().equal(IntSaver_.link, 1).notEqual(IntSaver_.value, 0).build()
         return query.subscribe().on(AndroidScheduler.mainThread()).
             transform {
                 query.findUnique()?.value ?: 1

@@ -3,6 +3,7 @@ package com.alex.willtrip.core.story.implementations
 import com.alex.willtrip.core.story.interfaces.ObstacleLoader
 import com.alex.willtrip.core.story.interfaces.SceneLoader
 import com.alex.willtrip.core.story.objects.*
+import com.alex.willtrip.eventbus.SceneChangedEvent
 import com.alex.willtrip.extensions.toObstacle
 import com.alex.willtrip.objectbox.ObjectBox
 import com.alex.willtrip.objectbox.class_boxes.ObstacleDB
@@ -10,6 +11,7 @@ import com.alex.willtrip.objectbox.class_boxes.ObstacleDB_
 import com.alex.willtrip.objectbox.helpers.IntSaver
 import com.alex.willtrip.objectbox.helpers.IntSaver_
 import io.objectbox.Box
+import org.greenrobot.eventbus.EventBus
 import org.threeten.bp.LocalDate
 import java.lang.IllegalArgumentException
 
@@ -58,6 +60,7 @@ class SceneLoaderImp (val obstacleLoader: ObstacleLoader): SceneLoader {
     override fun saveCurrentScene(currentScene: Scene) {
         val id = getIntBox().query().equal(IntSaver_.link, 1).build().findUnique()?.id ?: 0
         getIntBox().put(IntSaver(id = id, link = 1, value = currentScene.link))
+        EventBus.getDefault().post(SceneChangedEvent(currentScene.link))
     }
 
     override fun savePreviousScene(previousScene: Scene) {

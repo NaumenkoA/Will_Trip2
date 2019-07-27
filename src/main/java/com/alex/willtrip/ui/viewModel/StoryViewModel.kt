@@ -11,21 +11,30 @@ import io.objectbox.reactive.DataObserver
 import io.objectbox.reactive.DataSubscription
 import org.threeten.bp.LocalDate
 import kotlin.concurrent.thread
+import android.widget.Toast
+import android.R.id.message
+import com.alex.willtrip.eventbus.SceneChangedEvent
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
-class StoryViewModel: ViewModel(), DataObserver<Int> {
 
-    private val storyManager = DaggerAppComponent.create().storyManager()
+class StoryViewModel: ViewModel() {
+
+    val storyManager = DaggerAppComponent.create().storyManager()
+    val wpManager = DaggerAppComponent.create().wpManager()
     private val storyData = MutableLiveData <Int>()
     private lateinit var subscription: DataSubscription
 
-    fun getData (): MutableLiveData <Int> {
-        cancelSubscription()
-        storyManager.addObserver(this)
-        return storyData
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: SceneChangedEvent) {
+        storyData.value = event.currentSceneLink
     }
 
-    override fun onData(data: Int) {
-        storyData.value = data
+    fun getData (): MutableLiveData <Int> {
+        EventBus.getDefault().register(this);
+        storyData.value = 0
+        return storyData
     }
 
     fun goNextScene (link: Int, currentDate: LocalDate) {
@@ -44,15 +53,16 @@ class StoryViewModel: ViewModel(), DataObserver<Int> {
 
     fun getPreviousScene(currentDate: LocalDate): Scene? = storyManager.getPreviousScene(currentDate)
 
-    fun bonusGranted (bonus: ObstacleBonus) = storyManager.bonusGranted(bonus)
-
-    private fun cancelSubscription() {
-        if (!::subscription.isInitialized) return
-        if (!subscription.isCanceled) subscription.cancel()
+    fun grantBonus(bonus: ObstacleBonus): Int {
+        return if (!bonus.isBonusGranted) {
+            wpManager.increaseWP(bonus.totalValue)
+            storyManager.bonusGranted(bonus)
+            bonus.totalValue
+        } else 0
     }
 
     override fun onCleared() {
         super.onCleared()
-        cancelSubscription()
+        EventBus.getDefault().unregister(this);
     }
 }

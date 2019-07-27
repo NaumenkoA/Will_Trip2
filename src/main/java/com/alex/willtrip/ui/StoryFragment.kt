@@ -12,6 +12,7 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
@@ -21,6 +22,7 @@ import android.view.ViewGroup
 import android.widget.Button
 
 import com.alex.willtrip.R
+import com.alex.willtrip.core.story.objects.ObstacleBonus
 import com.alex.willtrip.core.story.objects.Scene
 import com.alex.willtrip.ui.viewModel.StoryViewModel
 import kotlinx.android.synthetic.main.fragment_story.*
@@ -39,6 +41,7 @@ class StoryFragment : Fragment(), Observer<Int> {
     private var previousScene:Scene? = null
     private var isLoading = false
     private val matrix = ColorMatrix()
+    private val obstacleResolverForTest = ObstacleResolverTestImp()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +68,10 @@ class StoryFragment : Fragment(), Observer<Int> {
             goNextScene(3)
         }
 
+        obstacleResolveButton.setOnClickListener {
+            obstacleResolverForTest.resolveObstacles()
+        }
+
         buttonArray = arrayListOf(optionButton1, optionButton2, optionButton3)
 
         matrix.setSaturation(1f)
@@ -88,11 +95,14 @@ class StoryFragment : Fragment(), Observer<Int> {
     }
 
     private fun goNextScene(buttonNumber: Int) {
-        val selectedOptionPozition = currentScene.options.size - buttonNumber
-        val link = currentScene.options[selectedOptionPozition].nextSceneLink
+        val selectedOptionPosition = currentScene.options.size - buttonNumber
+        val link = currentScene.options[selectedOptionPosition].nextSceneLink
 
         if (link != null) viewModel.goNextScene(link, getCurrentDate())
-        else viewModel.loadNewStory()
+        else {
+            viewModel.loadNewStory()
+            viewModel.goNextScene(1, getCurrentDate())
+        }
     }
 
     override fun onChanged(link: Int?) {
@@ -221,7 +231,7 @@ class StoryFragment : Fragment(), Observer<Int> {
         stageTextView.text = mainText
         var obstacleText = ""
         obstacleList.forEach {
-            obstacleText += it +"\n"
+            obstacleText += it +"\n\n"
         }
         if (obstacleText == "") obstacleTextView.visibility = View.GONE
         else{
@@ -261,6 +271,18 @@ class StoryFragment : Fragment(), Observer<Int> {
         val isOptionEnabled = viewModel.checkObstaclesResolved(getCurrentDate())
 
         showSceneContent(mainText, obstacleList, optionList, isOptionEnabled, isAnimated)
+
+        checkBonus()
+    }
+
+    private fun checkBonus() {
+        if (currentScene.obstacles.isEmpty()) return
+        val obstacle = currentScene.obstacles[0]
+        if (obstacle is ObstacleBonus && !obstacle.isBonusGranted) {
+            val increaseWP = viewModel.grantBonus(obstacle)
+            Snackbar.make(rootLayout, resources.getString(R.string.willpower_increased_message, increaseWP.toString()), Snackbar.LENGTH_LONG).show()
+            this.onChanged(0)
+        }
     }
 
     private fun setButtonState (button: Button, text: String?, isEnabled: Boolean) {

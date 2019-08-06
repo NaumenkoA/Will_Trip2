@@ -1,0 +1,80 @@
+<android.support.design.widget.CoordinatorLayout
+         xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:tools="http://schemas.android.com/tools"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         xmlns:app="http://schemas.android.com/apk/res-auto"
+         android:background="@color/colorLightGrey"
+         tools:context="com.alex.willtrip.ui.ResultsFragment">
+
+    <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/colorWhite"
+                app:contentScrim="@color/colorDeepBlue"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+            <RelativeLayout
+                    app:layout_collapseMode="parallax"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <LinearLayout
+                        android:id="@+id/dateLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/dateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/tab_layout"
+                        android:layout_below="@id/dateLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_gravity="center"
+                        android:background="@color/colorDeepBlue"
+                        app:tabGravity="fill"
+                        app:tabMode="fixed">
+
+                    <android.support.design.widget.TabItem
+                            android:text="@string/activities"
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"/>
+
+                    <android.support.design.widget.TabItem
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:text="@string/results"/>
+
+                </android.support.design.widget.TabLayout>
+
+            </RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <TabHost android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    </TabHost>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</android.support.design.widget.CoordinatorLayout>

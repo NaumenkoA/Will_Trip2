@@ -1,5 +1,9 @@
 package com.alex.willtrip.extensions
 
+import android.support.annotation.LayoutRes
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.alex.willtrip.core.do_manager.Do
 import com.alex.willtrip.core.do_manager.period.*
 import com.alex.willtrip.core.story.objects.*
@@ -186,3 +190,8 @@ fun List<Long>.toIntList(): List<Int> {
 fun Int.toBoolean(): Boolean {
     return this == 1
 }
+
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}
+

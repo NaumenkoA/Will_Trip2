@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/doNameTextView" tools:text="GET UP EARLY"
+                card_view:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" card_view:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginTop="16dp"
+                card_view:layout_constraintTop_toTopOf="parent" android:textSize="22sp" android:textStyle="bold"/>
+        <android.support.constraint.Guideline
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" card_view:layout_constraintGuide_begin="171dp"
+                android:id="@+id/guideline4" card_view:layout_constraintGuide_percent="0.35"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13" card_view:layout_constraintStart_toStartOf="@+id/guideline4"
+                android:layout_marginStart="24dp" tools:text="Complexity WP:"
+                android:textSize="18sp" android:layout_marginTop="16dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/doNameTextView"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/compWPTextView" card_view:layout_constraintStart_toEndOf="@+id/textView13"
+                android:layout_marginStart="16dp"
+                tools:text="3" android:textSize="18sp" android:layout_marginTop="16dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/doNameTextView"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15" card_view:layout_constraintStart_toStartOf="@+id/guideline4"
+                android:layout_marginStart="24dp" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/textView13" tools:text="Chain WP:"
+                android:textSize="18sp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chainWPTextView" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/textView13"
+                card_view:layout_constraintStart_toEndOf="@+id/textView15" android:layout_marginStart="16dp"
+                tools:text="1" android:textSize="18sp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_circle_blue"
+                android:gravity="center"
+                android:id="@+id/totalWPTextView" card_view:layout_constraintEnd_toStartOf="@+id/guideline4"
+                android:layout_marginEnd="8dp" card_view:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/doNameTextView" tools:text="4 WP"
+                android:textSize="24sp"
+                android:layout_marginBottom="8dp" card_view:layout_constraintBottom_toTopOf="@+id/noteEditText"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6" card_view:layout_constraintStart_toStartOf="@+id/guideline4"
+                android:layout_marginStart="24dp" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/textView15" tools:text="Chain length:"
+                android:textSize="18sp"
+        />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chainLengthTextView" card_view:layout_constraintStart_toEndOf="@+id/textView6"
+                android:layout_marginStart="16dp" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/textView15" tools:text="5 days"
+                android:textSize="18sp"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:gravity="center"
+                android:ems="10"
+                android:id="@+id/noteEditText" android:hint="@string/add_note" android:layout_marginEnd="8dp"
+                card_view:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                card_view:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/textView6"/>
+        <ImageButton
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_done_black_36dp"
+                android:tint="@color/colorGreen"
+                android:id="@+id/doneImageButton" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/noteEditText" android:layout_marginBottom="8dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:contentDescription="@string/done"/>
+
+        <ImageButton
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clear_black_36dp"
+                android:tint="@color/colorRed"
+                android:id="@+id/failImageButton"
+                android:layout_marginBottom="8dp"
+                card_view:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toBottomOf="@+id/noteEditText"
+                card_view:layout_constraintStart_toEndOf="@+id/doneImageButton" android:layout_marginStart="8dp"
+                card_view:layout_constraintEnd_toStartOf="@+id/skipButton" android:layout_marginEnd="8dp"
+                android:contentDescription="@string/not_done"/>
+        <Button
+                android:text="@string/not_today"
+                android:layout_width="127dp"
+                android:layout_height="0dp"
+                android:id="@+id/skipButton"
+                card_view:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" card_view:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp" card_view:layout_constraintTop_toBottomOf="@+id/noteEditText"
+        />
+        <TextView
+                android:text="@string/vertical_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:id="@+id/menuTextView" card_view:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
+                card_view:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

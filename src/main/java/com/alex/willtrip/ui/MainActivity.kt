@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_habits -> showToast ("Habit")
-                R.id.action_today -> showToast ("Today")
+                R.id.action_today -> showFragment(FRAGMENT_RESULTS)
                 R.id.action_trip_mode -> showFragment (FRAGMENT_STORY)
                 R.id.action_settings -> showFragment (FRAGMENT_SETTINGS)
             }
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     private fun createFragment(tag: String): Fragment {
         return when (tag) {
             FRAGMENT_SETTINGS -> SettingsFragment()
+            FRAGMENT_RESULTS -> ResultsFragment()
             FRAGMENT_STORY -> StoryFragment()
             else -> throw IllegalArgumentException ("${this::class.java.simpleName}: can't create Fragment with tag: $tag. $tag is not found")
         }
@@ -64,5 +65,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val FRAGMENT_SETTINGS = "fragment_settings"
         const val FRAGMENT_STORY = "fragment_story"
+        const val FRAGMENT_RESULTS = "fragment_results"
     }
 }

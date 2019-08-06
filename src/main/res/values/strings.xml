@@ -59,7 +59,8 @@
     <string name="story_19">You leave the Arden forest, and on one of the trees in the distance you see a carved
         inscription. You wonder what is written there, but the wolf could still be somewhere nearby.
     </string>
-    <string name="story_20">On the tree the inscription is engraved:\n\n \"It is a rough road that leads to the heights of
+    <string name="story_20">On the tree the inscription is engraved:\n\n \"It is a rough road that leads to the heights
+        of
         greatness\".
     </string>
     <string name="story_21">You see a calm river in front of you. Looking around, you can\'t see the crossing on foot.
@@ -153,7 +154,8 @@
         here, and many of them have a dark soul. My spell can be overcame only by those who have strong will and pure
         thoughts.\"
     </string>
-    <string name="story_51">The magician replies to you:\n\n \"I see you\'re a man of strong will. I have something for you.
+    <string name="story_51">The magician replies to you:\n\n \"I see you\'re a man of strong will. I have something for
+        you.
         This is the Sword of a thousand truths. If he falls into the hands of a man with very strong will, then he can
         crush the whole army.\"
     </string>
@@ -164,7 +166,8 @@
     <string name="story_54">You see a big old chest on the side of the road. It is inscribed in a language you do not
         know.
     </string>
-    <string name="story_55">You find some strange stone inside. When you look at it, words are heard in your head: \n\n \"You
+    <string name="story_55">You find some strange stone inside. When you look at it, words are heard in your head: \n\n
+        \"You
         are only as lazy or lacking in willpower as you think you are.\"
     </string>
 
@@ -309,6 +312,25 @@
     <string name="to_default_question">Reset all settings to default</string>
     <string name="settings_to_default_done">All settings are reset to default</string>
     <string name="willpower_increased_message">Your WillPower was increased by %1$s points</string>
+    <string name="chain_length_days">%1$d days</string>
+    <string name="undo_result">Undo result</string>
+    <string name="add_note">Add note</string>
+    <string name="not_today">Not today</string>
+    <string name="vertical_dots">⋮</string>
+    <string name="success">Success</string>
+    <string name="fail">Fail</string>
+    <string name="wp_result_positive">+ %1$d WP</string>
+    <string name="wp_result_negative">- %1$d WP</string>
+    <string name="skipped">Skipped</string>
+    <string name="wp_result_neutral">%1$d WP</string>
+    <string name="obligatory">Obligatory:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="done">Done</string>
+    <string name="not_done">Not done</string>
+    <string name="special_day">Special day</string>
+    <string name="activities">Actions</string>
+    <string name="results">Results</string>
 
     <string-array name="array_week_starts_from">
         <item>Mon</item>
